@@ -1,4 +1,4 @@
-package com.PhotoGallery.PhotoGallery;
+package lv.gallery.mainAppStart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
