@@ -1,12 +1,9 @@
 package lv.gallery.builders.user;
 
-
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "lv/gallery")
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "id")
