@@ -1,5 +1,5 @@
-package lv.gallery.businesslogic.user.userenter;
-import lv.gallery.businesslogic.ValidationError;
+package lv.photogallery.businesslogic.user.userenter;
+import lv.photogallery.businesslogic.ValidationError;
 
 import java.util.List;
 

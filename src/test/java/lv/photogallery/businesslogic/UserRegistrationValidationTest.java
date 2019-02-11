@@ -1,8 +1,6 @@
-package lv.businesslogic;
+package lv.photogallery.businesslogic;
 
-import lv.gallery.PhotoGalleryApplication;
-import lv.gallery.businesslogic.ValidationError;
-import lv.gallery.businesslogic.user.userregistration.*;
+import lv.photogallery.businesslogic.user.userregistration.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

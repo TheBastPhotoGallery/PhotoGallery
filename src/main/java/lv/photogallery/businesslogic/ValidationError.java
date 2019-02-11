@@ -1,4 +1,4 @@
-package lv.gallery.businesslogic;
+package lv.photogallery.businesslogic;
 
 public class ValidationError {
     private String field;

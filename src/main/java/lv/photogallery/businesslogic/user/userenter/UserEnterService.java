@@ -1,4 +1,4 @@
-package lv.gallery.businesslogic.user.userenter;
+package lv.photogallery.businesslogic.user.userenter;
 
 
 

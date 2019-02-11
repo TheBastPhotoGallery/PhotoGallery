@@ -1,23 +1,24 @@
-package lv.gallery.businesslogic.user.userregistration;
+package lv.photogallery.businesslogic.user.userenter;
 
-import lv.gallery.businesslogic.ValidationError;
+import lv.photogallery.businesslogic.ValidationError;
 
 import java.util.List;
 
-public class UserRegistrationResponse {
+public class UserEnterResponse {
+
     private Long userId;
 
     private boolean success;
 
     private List<ValidationError> errors;
 
-    public UserRegistrationResponse(Long userId) {
+    public UserEnterResponse(Long userId) {
         this.userId = userId;
         this.success = true;
         this.errors = null;
     }
 
-    public UserRegistrationResponse(List<ValidationError> errors) {
+    public UserEnterResponse(List<ValidationError> errors) {
         this.userId = null;
         this.success = false;
         this.errors = errors;

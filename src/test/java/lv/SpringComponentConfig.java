@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Configuration
 @EnableJpaAuditing
-@ComponentScan(basePackages = {"lv.gallery"})
+@ComponentScan(basePackages = {"lv.photogallery.businesslogic"})
 public class SpringComponentConfig {
 
 }

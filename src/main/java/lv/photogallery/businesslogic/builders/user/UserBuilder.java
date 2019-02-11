@@ -1,4 +1,4 @@
-package lv.gallery.businesslogic.builders.user;
+package lv.photogallery.businesslogic.builders.user;
 
 public class UserBuilder {
     private Long id;

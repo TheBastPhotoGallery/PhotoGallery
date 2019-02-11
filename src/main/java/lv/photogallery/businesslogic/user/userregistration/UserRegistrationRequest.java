@@ -1,10 +1,10 @@
-package lv.gallery.businesslogic.user.userenter;
+package lv.photogallery.businesslogic.user.userregistration;
 
-public class UserEnterRequest {
+public class UserRegistrationRequest {
     private String login;
     private String password;
 
-    public UserEnterRequest (String login, String password) {
+    public UserRegistrationRequest(String login, String password) {
         this.login = login;
         this.password = password;
     }

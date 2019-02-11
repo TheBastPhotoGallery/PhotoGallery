@@ -1,6 +1,6 @@
-package lv.gallery.businesslogic.user.userregistration;
+package lv.photogallery.businesslogic.user.userregistration;
 
-import lv.gallery.businesslogic.ValidationError;
+import lv.photogallery.businesslogic.ValidationError;
 
 import java.util.List;
 
