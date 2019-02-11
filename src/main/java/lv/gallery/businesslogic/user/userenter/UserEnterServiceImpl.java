@@ -1,8 +1,8 @@
-package lv.gallery.user.userenter;
+package lv.gallery.businesslogic.user.userenter;
 
-import lv.gallery.ValidationError;
-import lv.gallery.builders.user.User;
-import lv.gallery.database.UserRepository;
+import lv.gallery.businesslogic.ValidationError;
+import lv.gallery.businesslogic.builders.user.User;
+import lv.gallery.businesslogic.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

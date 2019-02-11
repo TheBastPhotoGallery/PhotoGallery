@@ -1,11 +1,12 @@
-package lv;
+package lv.businesslogic;
 
-import lv.gallery.ValidationError;
-import lv.gallery.builders.user.User;
-import lv.gallery.database.UserRepository;
-import lv.gallery.user.userenter.UserEnterRequest;
-import lv.gallery.user.userenter.UserEnterResponse;
-import lv.gallery.user.userenter.UserEnterService;
+import lv.SpringComponentConfig;
+import lv.gallery.businesslogic.ValidationError;
+import lv.gallery.businesslogic.builders.user.User;
+import lv.gallery.businesslogic.database.UserRepository;
+import lv.gallery.businesslogic.user.userenter.UserEnterRequest;
+import lv.gallery.businesslogic.user.userenter.UserEnterResponse;
+import lv.gallery.businesslogic.user.userenter.UserEnterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

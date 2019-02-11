@@ -1,6 +1,5 @@
-package lv.gallery.user.userenter;
-import lv.gallery.ValidationError;
-import org.springframework.validation.Errors;
+package lv.gallery.businesslogic.user.userenter;
+import lv.gallery.businesslogic.ValidationError;
 
 import java.util.List;
 

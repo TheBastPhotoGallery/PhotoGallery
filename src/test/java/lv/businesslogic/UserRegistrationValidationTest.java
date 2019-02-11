@@ -1,10 +1,8 @@
-package lv;
+package lv.businesslogic;
 
 import lv.gallery.PhotoGalleryApplication;
-import lv.gallery.ValidationError;
-import lv.gallery.user.userregistration.UserRegistrationRequest;
-import lv.gallery.user.userregistration.UserRegistrationResponse;
-import lv.gallery.user.userregistration.UserRegistrationService;
+import lv.gallery.businesslogic.ValidationError;
+import lv.gallery.businesslogic.user.userregistration.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes={PhotoGalleryApplication.class})
+@SpringBootTest
 public class UserRegistrationValidationTest {
 
     @Autowired

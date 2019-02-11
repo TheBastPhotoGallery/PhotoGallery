@@ -1,6 +1,6 @@
-package lv.gallery.database;
+package lv.gallery.businesslogic.database;
 
-import lv.gallery.builders.user.User;
+import lv.gallery.businesslogic.builders.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
