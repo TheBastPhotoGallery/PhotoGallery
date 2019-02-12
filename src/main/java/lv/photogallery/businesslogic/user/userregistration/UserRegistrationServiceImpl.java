@@ -28,7 +28,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 
         User user = createUser()
-                .withLogin(request.getLogin())
+                .withEmail(request.getEmail())
                 .withPassword(request.getPassword())
                 .build();
 

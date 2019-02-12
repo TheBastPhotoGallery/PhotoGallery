@@ -19,12 +19,12 @@ public class UserRealRepositoryInputValidateTest {
     public void inputToRepoTest(){
 
         User user = new User();
-        user.setLogin("testLogin");
+        user.setEmail("tesEmail");
         user.setPassword("testPass");
 
         userRepository.save(user);
 
-        assertThat(userRepository.findByLogin(user.getLogin())).get().isEqualTo(user);
+        assertThat(userRepository.findByEmail(user.getEmail())).get().isEqualTo(user);
 
     }
 

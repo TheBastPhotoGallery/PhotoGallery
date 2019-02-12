@@ -15,20 +15,11 @@ public class UserEnterValidatorImpl implements UserEnterValidator {
     private UserRepository userRepository;
     @Override
     public List<ValidationError> validate(UserEnterRequest request) {
-        // System.out.println(userRepository.findByLogin("slavaTest").get());
         List<ValidationError> errors = new ArrayList<>();
-        validateLogin(request.getLogin()).ifPresent(errors::add);
         validatePassword(request.getPassword()).ifPresent(errors::add);
-        validateLoginWithPassword(request.getLogin(), request.getPassword()).ifPresent(errors::add);
-
+        validateEmailWithPassword(request.getEmail(), request.getPassword()).ifPresent(errors::add);
+        validateEmail((request.getEmail())).ifPresent(errors::add);
         return errors;
-    }
-    private Optional<ValidationError> validateLogin(String login) {
-        if (login == null || login.isEmpty()) {
-            return Optional.of(new ValidationError("login", "Must not be empty"));
-        } else {
-            return Optional.empty();
-        }
     }
 
     private Optional<ValidationError> validatePassword(String password) {
@@ -39,16 +30,24 @@ public class UserEnterValidatorImpl implements UserEnterValidator {
         }
     }
 
-    private Optional<ValidationError> validateLoginWithPassword(String login, String password) {
-        if (login != null && !login.isEmpty()) {
-            Optional<User> userOpt = userRepository.findByLogin(login);
+    private Optional<ValidationError> validateEmailWithPassword(String email, String password) {
+        if (email != null && !email.isEmpty()) {
+            Optional<User> userOpt = userRepository.findByEmail(email);
             if (!userOpt.isPresent()) {
-                return Optional.of(new ValidationError("login", "Such login not found"));
+                return Optional.of(new ValidationError("email", "Such email not found"));
             }
             if (!userOpt.get().getPassword().equals(password)){
                 return  Optional.of(new ValidationError("password", "Incorrect password"));
             }
         }
         return Optional.empty();
+    }
+
+    private Optional<ValidationError> validateEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return Optional.of(new ValidationError("email", "Must not be empty"));
+        }else {
+            return Optional.empty();
+        }
     }
 }

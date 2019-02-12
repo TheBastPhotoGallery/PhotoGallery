@@ -31,24 +31,34 @@ public class UserEnterValidationTest {
     @Before
     public void setUp() {
 
-        user.setLogin("testLogin");
+        user.setEmail("testEmail");
         user.setPassword("testPassword");
         userRepository.save(user);
     }
 
     @Test
     public void finedByLoginInRepositoryTest() {
-        User lookingUser = userRepository.findByLogin("testLogin").get();
-        assertThat(lookingUser.getLogin()).isEqualTo("testLogin");
+        User lookingUser = userRepository.findByEmail("testEmail").get();
+        assertThat(lookingUser.getEmail()).isEqualTo("testEmail");
     }
 
     @Test
     public void UserPasswordValidationTest() {
-        UserEnterRequest request = new UserEnterRequest("testLogin", "wrongpassword");
+        UserEnterRequest request = new UserEnterRequest("testEmail", "wrongemail");
         UserEnterResponse response = userEnterService.enter(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "password");
         assertEquals(errors.get(0).getErrorMessage(), "Incorrect password");
+    }
+
+    @Test
+    public void UserEmailValidationTest() {
+        UserEnterRequest request = new UserEnterRequest("WrongTestEmail", "testPassword");
+        UserEnterResponse response = userEnterService.enter(request);
+        List<ValidationError> errors = response.getErrors();
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "email");
+        assertEquals(errors.get(0).getErrorMessage(), "Such email not found");
     }
 }

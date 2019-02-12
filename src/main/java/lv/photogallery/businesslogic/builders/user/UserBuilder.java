@@ -15,7 +15,6 @@ public class UserBuilder {
     public User build() {
         User user = new User();
         user.setId(id);
-        user.setLogin(login);
         user.setPassword(password);
         user.setEmail(email);
         return user;
@@ -23,11 +22,6 @@ public class UserBuilder {
 
     public UserBuilder withId(Long id) {
         this.id = id;
-        return this;
-    }
-
-    public UserBuilder withLogin(String login) {
-        this.login = login;
         return this;
     }
 

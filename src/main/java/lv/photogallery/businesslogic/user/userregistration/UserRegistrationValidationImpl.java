@@ -18,18 +18,10 @@ public class UserRegistrationValidationImpl implements UserRegistrationValidator
     @Override
     public List<ValidationError> validate(UserRegistrationRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validateLogin(request.getLogin()).ifPresent(errors::add);
-        validateDuplicateLogin(request.getLogin()).ifPresent(errors::add);
+        validateDuplicateEmail(request.getEmail()).ifPresent(errors::add);
         validatePassword(request.getPassword()).ifPresent(errors::add);
+        validateEmail(request.getEmail()).ifPresent(errors::add);
         return errors;
-    }
-
-    private Optional<ValidationError> validateLogin(String login) {
-        if (login == null || login.isEmpty()) {
-            return Optional.of(new ValidationError("login", "Must not be empty"));
-        } else {
-            return Optional.empty();
-        }
     }
 
     private Optional<ValidationError> validatePassword(String password) {
@@ -40,13 +32,21 @@ public class UserRegistrationValidationImpl implements UserRegistrationValidator
         }
     }
 
-    private Optional<ValidationError> validateDuplicateLogin(String login) {
-        if (login != null && !login.isEmpty()) {
-            Optional<User> userOpt = userRepository.findByLogin(login);
+    private Optional<ValidationError> validateDuplicateEmail(String email) {
+        if (email != null && !email.isEmpty()) {
+            Optional<User> userOpt = userRepository.findByEmail(email);
             if (userOpt.isPresent()) {
-                return Optional.of(new ValidationError("login", "Must not be repeated"));
+                return Optional.of(new ValidationError("email", "Must not be repeated"));
             }
         }
         return Optional.empty();
+    }
+
+    private Optional<ValidationError> validateEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return Optional.of(new ValidationError("email", "Must not be empty"));
+        }else {
+            return Optional.empty();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class UserEnterServiceImpl implements UserEnterService {
             return new UserEnterResponse(validationErrors);
         }
 
-        User user =  userRepository.findByLogin(request.getLogin()).get();
+        User user =  userRepository.findByEmail(request.getEmail()).get();
 
         return new UserEnterResponse(user.getId());
     }
