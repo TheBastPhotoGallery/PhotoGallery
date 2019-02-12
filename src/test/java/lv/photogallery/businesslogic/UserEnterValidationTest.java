@@ -1,6 +1,6 @@
 package lv.photogallery.businesslogic;
 
-import lv.SpringComponentConfig;
+import lv.photogallery.SpringComponentConfig;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
 import lv.photogallery.businesslogic.user.userenter.UserEnterRequest;
@@ -31,20 +31,20 @@ public class UserEnterValidationTest {
     @Before
     public void setUp() {
 
-        user.setLogin("slavaTest");
-        user.setPassword("password");
+        user.setLogin("testLogin");
+        user.setPassword("testPassword");
         userRepository.save(user);
     }
 
     @Test
     public void finedByLoginInRepositoryTest() {
-        User lookingUser = userRepository.findByLogin("slavaTest").get();
-        assertThat(lookingUser.getLogin()).isEqualTo("slavaTest");
+        User lookingUser = userRepository.findByLogin("testLogin").get();
+        assertThat(lookingUser.getLogin()).isEqualTo("testLogin");
     }
 
     @Test
     public void UserPasswordValidationTest() {
-        UserEnterRequest request = new UserEnterRequest("slavaTest", "wrongpassword");
+        UserEnterRequest request = new UserEnterRequest("testLogin", "wrongpassword");
         UserEnterResponse response = userEnterService.enter(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);

@@ -1,4 +1,4 @@
-package lv;
+package lv.photogallery;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @ComponentScan(basePackages = {"lv.photogallery.businesslogic"})
 public class SpringComponentConfig {
-
 }
