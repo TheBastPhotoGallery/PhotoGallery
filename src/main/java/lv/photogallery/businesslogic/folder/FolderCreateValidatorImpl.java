@@ -2,15 +2,15 @@ package lv.photogallery.businesslogic.folder;
 
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
-import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
 import lv.photogallery.businesslogic.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class FolderCreateValidatorImpl implements FolderCreateValidator {
     @Autowired
     private FolderRepository folderRepository;
@@ -18,6 +18,7 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
     private UserRepository userRepository;
     @Override
     public List<ValidationError> validate(FolderCreateRequest request) {
+        System.out.println(request.getClientEmail());
         List<ValidationError> errors = new ArrayList<>();
         validateFolderName(request.getFolderName()).ifPresent(errors::add);
         validateDuplicateFolderName(request.getFolderName()).ifPresent(errors::add);
@@ -27,7 +28,7 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
 
     private Optional<ValidationError> validateFolderName(String name) {
         if (name == null || name.isEmpty()) {
-            return Optional.of(new ValidationError("name", "Must not be empty"));
+            return Optional.of(new ValidationError("folderName", "Must not be empty"));
         } else {
             return Optional.empty();
         }
@@ -35,16 +36,16 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
 
     private Optional<ValidationError> validateDuplicateFolderName(String name) {
         if (name != null && !name.isEmpty()) {
-            Optional<Folder> userOpt = folderRepository.findByName(name);
+            Optional<Folder> userOpt = folderRepository.findByFolderName(name);
             if (userOpt.isPresent()) {
-                return Optional.of(new ValidationError("email", "Must not be repeated"));
+                return Optional.of(new ValidationError("folderName", "Must not be repeated"));
             }
         }
         return Optional.empty();
     }
     private Optional<ValidationError> validateEmail(String email) {
         if (email != null && !email.isEmpty()) {
-            Optional<User> userOpt = userRepository.findByEmail(email);
+            Optional<Folder> userOpt = folderRepository.findByEmail(email);
             if (userOpt.isPresent()) {
                 return Optional.of(new ValidationError("email", "Must not be repeated"));
             }

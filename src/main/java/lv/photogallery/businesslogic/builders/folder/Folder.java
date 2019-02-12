@@ -1,8 +1,6 @@
 package lv.photogallery.businesslogic.builders.folder;
 
 import javax.persistence.*;
-import java.io.File;
-import java.util.Map;
 
 @Entity
 @Table(name = "Folder")
@@ -13,28 +11,28 @@ public class Folder {
     private Long id;
 
     @Column(name = "folderName", nullable = false)
-    private String foldername;
+    private String folderName;
 
     @Column(name = "files")
-    private Map<Integer, File> files;
+    private String files;
 
     @Column(name = "email", nullable = false)
-    private String clientEmail;
+    private String email;
 
-    public String getFoldername() {
-        return foldername;
+    public String getFolderName() {
+        return folderName;
     }
 
-    public void setFoldername(String foldername) {
-        this.foldername = foldername;
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
     }
 
-    public String getClientEmail() {
-        return clientEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
@@ -45,11 +43,11 @@ public class Folder {
         this.id = id;
     }
 
-    public Map<Integer, File> getFiles() {
+    public String getFiles() {
         return files;
     }
 
-    public void setFiles(Map<Integer, File> files) {
+    public void setFiles(String files) {
         this.files = files;
     }
 

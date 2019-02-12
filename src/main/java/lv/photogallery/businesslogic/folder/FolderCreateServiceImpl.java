@@ -14,7 +14,7 @@ import static lv.photogallery.businesslogic.builders.folder.FolderBuilder.create
 @Component
 public class FolderCreateServiceImpl implements FolderCreateService {
     @Autowired
-    private FolderCreateValidatorImpl validator;
+    private FolderCreateValidator validator;
     @Autowired
     private FolderRepository folderRepository;
 

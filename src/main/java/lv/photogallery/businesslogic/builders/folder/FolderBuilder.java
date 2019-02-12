@@ -1,12 +1,9 @@
 package lv.photogallery.businesslogic.builders.folder;
 
 
-import java.io.File;
-import java.util.Map;
-
 public class FolderBuilder {
     private Long id;
-    private Map<Integer, File> files;
+    private String files;
     private String folderName;
     private String clientEmail;
 
@@ -20,8 +17,8 @@ public class FolderBuilder {
         Folder folder = new Folder();
         folder.setId(id);
         folder.setFiles(files);
-        folder.setFoldername(folderName);
-        folder.setClientEmail(clientEmail);
+        folder.setFolderName(folderName);
+        folder.setEmail(clientEmail);
         return folder;
     }
 
@@ -40,7 +37,7 @@ public class FolderBuilder {
         return this;
     }
 
-    public FolderBuilder withFiles(Map<Integer, File> file) {
+    public FolderBuilder withFiles(String file) {
         this.files = file;
         return this;
     }

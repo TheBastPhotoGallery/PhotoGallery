@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class FolderCreateRequest {
     private String folderName;
-    private Map<Integer, File> file;
+    private String file;
     private String clientEmail;
 
-    public FolderCreateRequest(String folderNmae, Map<Integer, File> file, String clientEmail) {
+    public FolderCreateRequest(String folderName, String file, String clientEmail) {
         this.folderName = folderName;
         this.file = file;
         this.clientEmail = clientEmail;
@@ -30,11 +30,11 @@ public class FolderCreateRequest {
         this.folderName = folderName;
     }
 
-    public Map<Integer, File> getFile() {
+    public String getFile() {
         return file;
     }
 
-    public void setFile(Map<Integer, File> file) {
+    public void setFile(String file) {
         this.file = file;
     }
 }

@@ -1,6 +1,7 @@
-package lv.photogallery.businesslogic;
+package lv.photogallery.businesslogic.usertests;
 
 import lv.photogallery.SpringComponentConfig;
+import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
 import lv.photogallery.businesslogic.user.userregistration.*;
