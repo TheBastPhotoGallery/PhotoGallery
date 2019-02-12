@@ -26,9 +26,4 @@ public class Controller {
         return "registration";
     }
 
-    @RequestMapping("/kids")
-    public String kids() {
-
-        return "kids";
-    }
 }

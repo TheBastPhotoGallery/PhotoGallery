@@ -2,7 +2,6 @@ package lv.photogallery.businesslogic.builders.user;
 
 public class UserBuilder {
     private Long id;
-    private String login;
     private String password;
     private String email;
 
