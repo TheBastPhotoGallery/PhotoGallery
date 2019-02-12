@@ -4,7 +4,7 @@ public class UserBuilder {
     private Long id;
     private String login;
     private String password;
-
+    private String email;
 
     private UserBuilder() {}
 
@@ -17,6 +17,7 @@ public class UserBuilder {
         user.setId(id);
         user.setLogin(login);
         user.setPassword(password);
+        user.setEmail(email);
         return user;
     }
 
@@ -35,4 +36,8 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder withEmail(String email) {
+        this.email = email;
+        return this;
+    }
 }
