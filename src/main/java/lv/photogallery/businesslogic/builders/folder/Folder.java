@@ -1,5 +1,7 @@
 package lv.photogallery.businesslogic.builders.folder;
 
+import lv.photogallery.businesslogic.builders.user.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,8 +18,19 @@ public class Folder {
     @Column(name = "files")
     private String files;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    //@Column(name = "email", nullable = false)
+    //private String email;
+    @JoinColumn(name = "EMAIL")
+    private User email;
+
+    public User getEmail() {
+        return email;
+    }
+
+    public void setEmail(User email) {
+        this.email = email;
+    }
 
     public String getFolderName() {
         return folderName;
@@ -25,14 +38,6 @@ public class Folder {
 
     public void setFolderName(String folderName) {
         this.folderName = folderName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Long getId() {

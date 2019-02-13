@@ -1,6 +1,10 @@
 package lv.photogallery.businesslogic.builders.user;
 
+import lv.photogallery.businesslogic.builders.folder.Folder;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -18,6 +22,17 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "email", fetch = FetchType.EAGER)
+    private Collection<Folder> folderList;
+
+    public Collection<Folder> getFolderList() {
+        return folderList;
+    }
+
+    public void setFolderList(Collection<Folder> folderList) {
+        this.folderList = folderList;
+    }
 
     public String getEmail() {
         return email;

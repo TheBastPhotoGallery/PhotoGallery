@@ -18,7 +18,7 @@ public class FolderBuilder {
         folder.setId(id);
         folder.setFiles(files);
         folder.setFolderName(folderName);
-        folder.setEmail(clientEmail);
+       // folder.setEmail(clientEmail);
         return folder;
     }
 

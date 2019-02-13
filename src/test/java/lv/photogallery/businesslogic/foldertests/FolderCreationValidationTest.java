@@ -3,7 +3,9 @@ package lv.photogallery.businesslogic.foldertests;
 import lv.photogallery.SpringComponentConfig;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
+import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
+import lv.photogallery.businesslogic.database.UserRepository;
 import lv.photogallery.businesslogic.folder.FolderCreateRequest;
 import lv.photogallery.businesslogic.folder.FolderCreateResponse;
 import lv.photogallery.businesslogic.folder.FolderCreateService;
@@ -15,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -27,15 +30,19 @@ public class FolderCreationValidationTest {
     private FolderRepository folderRepository;
     @Autowired
     private FolderCreateService folderCreateService;
+    @Autowired
+    private UserRepository userRepository;
+
     private Folder folder = new Folder();
+    private User user = new User();
 
     @Before
     public void setUp() {
-
-        folder.setEmail("test@email.lv");
-        folder.setFiles(null);
+        user.setEmail("testEmail");
+        user.setPassword("testPassword");
         folder.setFolderName("testFolderName");
-        folderRepository.save(folder);
+        user.setFolderList(Collections.singletonList(folder));
+        userRepository.save(user);
     }
 
     @Test
