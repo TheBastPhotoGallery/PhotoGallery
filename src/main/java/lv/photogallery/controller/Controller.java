@@ -25,5 +25,21 @@ public class Controller {
 
         return "registration";
     }
+    @RequestMapping("/gallery")
+    public String gallery() {
+
+        return "gallery";
+    }
+    @RequestMapping("/dashboard")
+    public String dashboard() {
+
+        return "dashboard";
+    }
+    @RequestMapping("/admin")
+    public String admin() {
+
+        return "admin";
+    }
+
 
 }

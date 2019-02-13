@@ -2,32 +2,88 @@
 <html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/static/css/main.css" type="text/css">
 <head>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-    <title>hello</title>
+        .form button:hover,.form button:active,.form button:focus {
+            background: #1a1a1a;
+        }
+
+
+        .form .message a {
+            color: #1a1a1a;
+            text-decoration: none;
+
+        }
+        .container {
+            position: fixed;
+            z-index: 1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+
+        body {
+            background: #777777; /* fallback for old browsers */
+            background: -webkit-linear-gradient(right, darkslategray, lightsteelblue);
+            background: -moz-linear-gradient(right, darkslategray, lightsteelblue);
+            background: -o-linear-gradient(right, darkslategray, lightsteelblue);
+            background: linear-gradient(to left, darkslategray, lightsteelblue);
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        div.w3-container {
+            margin: 50px;
+            background-image: url("static/images/wedding.jpg");
+        }
+
+
+    </style>
+    <title>start</title>
 
 <body>
 
 
-<div class="leftBottom">
-
-            <button type="submit" class="btn btn-primary my-1">
-                <a class="nav-link" href="/">login</a>
-            </button>
-            <button type="submit" class="btn btn-primary my-1">Submit</button>
+<div>
+ <a class="nav-link" href="/login">login</a>
  </div>
 
 <div class="container">
+    <div class="leftBottom"></div>
+    <form action="/action_page.php">
+    <div class="w3-container w3-gray">
+    <input type="checkbox" name="weddings" value="Weddings"> Weddings<br>
+    </div>
 
-    <a class="link" href="/weddings"> <div class="w3-container w3-gray">
-            Weddings
+     <div class="w3-container w3-gray">
+         <input type="checkbox" name="kids" value="Kids"> Kids<br>
+
+    </div>
+    <div class="w3-container w3-gray">
+        <input type="checkbox" name="other" value="Other"> Other<br>
+    </div>
+
+    <input type="submit" value="Submit">
+    </form>
+
+    <div>
+    <a class="link" href="/dashboard"> <div class="w3-container w3-gray">
+        My Files
     </div></a>
-    <a class="link" href="/kids"> <div class="w3-container w3-gray">
-        Kids
-    </div></a>
-    <a class="link" href="/other"> <div class="w3-container w3-gray">
-        Other
-    </div></a>
+    <div>
+        <p>calendar</p>
+        <div>
+            <form>
+                Enter your e-mail: <input type="text" name="email"><br>
+
+                <input type="button" onclick="myFunction()" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>
