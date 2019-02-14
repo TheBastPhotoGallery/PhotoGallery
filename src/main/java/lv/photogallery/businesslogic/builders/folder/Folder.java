@@ -5,7 +5,7 @@ import lv.photogallery.businesslogic.builders.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Folder")
+@Table(name = "folder")
 public class Folder {
     @Id
     @Column(name = "id")
@@ -31,7 +31,6 @@ public class Folder {
     public void setEmail(User email) {
         this.email = email;
     }
-
     public String getFolderName() {
         return folderName;
     }

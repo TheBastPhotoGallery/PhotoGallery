@@ -6,6 +6,7 @@ import lv.photogallery.businesslogic.database.FolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 import static lv.photogallery.businesslogic.builders.folder.FolderBuilder.createFolder;
@@ -30,10 +31,10 @@ public class FolderCreateServiceImpl implements FolderCreateService {
         Folder folder = createFolder()
                 .withFolderName(request.getFolderName())
                 .withFiles(request.getFile())
-                .withEmail(request.getClientEmail())
+                .withEmail(request.getUser().getEmail())
                 .build();
 
-
+       // request.getUser().setFolderList(Collections.singletonList(folder));
         folderRepository.save(folder);
 
         return new FolderCreateResponse(folder.getId());

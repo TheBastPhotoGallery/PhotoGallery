@@ -1,5 +1,6 @@
 package lv.photogallery.realdatabasetest;
 
+import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
 import org.junit.Test;
@@ -7,6 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Collections;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -21,9 +25,10 @@ public class UserRealRepositoryInputValidateTest {
         User user = new User();
         user.setEmail("tesEmail");
         user.setPassword("testPass");
-
+        Folder folder = new Folder();
+        folder.setFolderName("testFolderName");
+        user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
-
         assertThat(userRepository.findByEmail(user.getEmail())).get().isEqualTo(user);
 
     }

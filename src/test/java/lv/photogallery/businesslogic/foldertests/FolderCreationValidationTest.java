@@ -15,8 +15,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,13 +44,24 @@ public class FolderCreationValidationTest {
         user.setEmail("testEmail");
         user.setPassword("testPassword");
         folder.setFolderName("testFolderName");
+        //folder.setEmail(user).;
+        //folderRepository.save(folder);
         user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
     }
 
+
+   @Rollback(false)
+   @Transactional
+    @Test
+    public void testingOfFolderRepository(){
+        assertEquals("testFolderName", folderRepository.findByFolderName("testFolderName").get().getFolderName());
+
+    }
+
     @Test
     public void shouldReturnErrorWhenNameIsNull() {
-        FolderCreateRequest request = new FolderCreateRequest(null, null, "testEmail", user);
+        FolderCreateRequest request = new FolderCreateRequest(null, null,  user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -59,7 +73,7 @@ public class FolderCreationValidationTest {
 
     public void shouldReturnErrorWhenPasswordIsNull() {
 
-        FolderCreateRequest request = new FolderCreateRequest("folderName", null, null, user);
+        FolderCreateRequest request = new FolderCreateRequest("folderName", null, user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -69,7 +83,7 @@ public class FolderCreationValidationTest {
 
     @Test
     public void shouldReturnErrorWhenEmailDuplicated() {
-        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null, "test@email.lv", user);
+        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null,  user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -79,11 +93,24 @@ public class FolderCreationValidationTest {
 
     @Test
     public void shouldReturnErrorWhenFolderNameDuplicated() {
-        FolderCreateRequest request = new FolderCreateRequest("testFolderName", null, "testEmail.lv", user);
+        FolderCreateRequest request = new FolderCreateRequest("testFolderName", null, user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "folderName");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
+    }
+
+    @Test
+    public void shouldReturnError() {
+        FolderCreateRequest request = new FolderCreateRequest("1testFolderName", null, user);
+        FolderCreateResponse response = folderCreateService.create(request);
+
+        Collection<Folder> collection = userRepository.findByEmail(user.getEmail()).get().getFolderList();
+
+        for (Folder folder : collection) {
+            System.out.println(folder.getFolderName());
+        }
+
     }
 }
