@@ -25,9 +25,6 @@ public class UserRealRepositoryInputValidateTest {
         User user = new User();
         user.setEmail("tesEmail");
         user.setPassword("testPass");
-        Folder folder = new Folder();
-        folder.setFolderName("testFolderName");
-        user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
         assertThat(userRepository.findByEmail(user.getEmail())).get().isEqualTo(user);
 

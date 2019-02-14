@@ -9,6 +9,7 @@ import lv.photogallery.businesslogic.database.UserRepository;
 import lv.photogallery.businesslogic.folder.FolderCreateRequest;
 import lv.photogallery.businesslogic.folder.FolderCreateResponse;
 import lv.photogallery.businesslogic.folder.FolderCreateService;
+import org.assertj.core.internal.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -44,19 +46,18 @@ public class FolderCreationValidationTest {
         user.setEmail("testEmail");
         user.setPassword("testPassword");
         folder.setFolderName("testFolderName");
-        //folder.setEmail(user).;
-        //folderRepository.save(folder);
+        folder.setEmail(user);
+        folder.setFiles("");
         user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
+        folderRepository.save(folder);
     }
 
-
-   @Rollback(false)
-   @Transactional
     @Test
-    public void testingOfFolderRepository(){
+    public void testingOfFolderRepositoryTest(){
         assertEquals("testFolderName", folderRepository.findByFolderName("testFolderName").get().getFolderName());
-
+        Collection<Folder> folders = userRepository.findByEmail("testEmail").get().getFolderList();
+        assertEquals("testFolderName", folders.stream().findFirst().get().getFolderName());
     }
 
     @Test
@@ -69,27 +70,19 @@ public class FolderCreationValidationTest {
         assertEquals(errors.get(0).getErrorMessage(), "Must not be empty");
     }
 
-    @Test
-
-    public void shouldReturnErrorWhenPasswordIsNull() {
-
-        FolderCreateRequest request = new FolderCreateRequest("folderName", null, user);
-        FolderCreateResponse response = folderCreateService.create(request);
-        List<ValidationError> errors = response.getErrors();
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "email");
-        assertEquals(errors.get(0).getErrorMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void shouldReturnErrorWhenEmailDuplicated() {
-        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null,  user);
-        FolderCreateResponse response = folderCreateService.create(request);
-        List<ValidationError> errors = response.getErrors();
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "email");
-        assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
-    }
+//    @Test
+//    public void shouldReturnErrorWhenEmailDuplicated() {
+//       List<Folder> f =( List<Folder>) folderRepository.findAll();
+//       for (Folder ff : f){
+//           System.out.println(ff.getEmail().getEmail());
+//       }
+//        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null,  user);
+//        FolderCreateResponse response = folderCreateService.create(request);
+//        List<ValidationError> errors = response.getErrors();
+//        assertEquals(errors.size(), 1);
+//        assertEquals(errors.get(0).getField(), "email");
+//        assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
+//    }
 
     @Test
     public void shouldReturnErrorWhenFolderNameDuplicated() {
@@ -101,16 +94,4 @@ public class FolderCreationValidationTest {
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
     }
 
-    @Test
-    public void shouldReturnError() {
-        FolderCreateRequest request = new FolderCreateRequest("1testFolderName", null, user);
-        FolderCreateResponse response = folderCreateService.create(request);
-
-        Collection<Folder> collection = userRepository.findByEmail(user.getEmail()).get().getFolderList();
-
-        for (Folder folder : collection) {
-            System.out.println(folder.getFolderName());
-        }
-
-    }
 }

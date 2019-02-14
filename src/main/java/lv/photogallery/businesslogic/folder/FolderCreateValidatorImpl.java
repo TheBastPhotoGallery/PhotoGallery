@@ -23,7 +23,7 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
         List<ValidationError> errors = new ArrayList<>();
         validateFolderName(request.getFolderName()).ifPresent(errors::add);
         validateDuplicateFolderName(request.getFolderName(), request.getUser().getEmail()).ifPresent(errors::add);
-        //validateEmail(request.getEmail().getEmail()).ifPresent(errors::add);
+        validateEmailNotNull(request.getUser().getEmail()).ifPresent(errors::add);
         return errors;
     }
 
@@ -50,20 +50,11 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
         return Optional.empty();
     }
 
-//    private Optional<ValidationError> validateEmail(String email) {
-//        if (email != null && !email.isEmpty()) {
-//            Collection<Folder> collection = userRepository.findByEmail(email).get().getFolderList();
-//
-//            for (Folder folder : collection) {
-//                if (folder.getEmail().equals()) {
-//                    System.out.println(folder.getEmail());
-//                    return Optional.of(new ValidationError("email", "Must not be repeated"));
-//                }
-//            }
-//        } else if (email == null || email.isEmpty()) {
-//            return Optional.of(new ValidationError("email", "Must not be empty"));
-//        }
-//        return Optional.empty();
-//    }
+    private Optional<ValidationError> validateEmailNotNull(String email) {
+        if (email == null || email.isEmpty()) {
+            return Optional.of(new ValidationError("email", "Must not be empty"));
+        }
+        return Optional.empty();
+    }
 
 }
