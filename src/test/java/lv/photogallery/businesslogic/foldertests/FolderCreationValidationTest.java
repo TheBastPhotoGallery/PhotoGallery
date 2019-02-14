@@ -47,7 +47,7 @@ public class FolderCreationValidationTest {
 
     @Test
     public void shouldReturnErrorWhenNameIsNull() {
-        FolderCreateRequest request = new FolderCreateRequest(null, null, "testEmail");
+        FolderCreateRequest request = new FolderCreateRequest(null, null, "testEmail", user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -58,7 +58,8 @@ public class FolderCreationValidationTest {
     @Test
 
     public void shouldReturnErrorWhenPasswordIsNull() {
-        FolderCreateRequest request = new FolderCreateRequest("folderName", null, null);
+
+        FolderCreateRequest request = new FolderCreateRequest("folderName", null, null, user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -68,7 +69,7 @@ public class FolderCreationValidationTest {
 
     @Test
     public void shouldReturnErrorWhenEmailDuplicated() {
-        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null, "test@email.lv");
+        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null, "test@email.lv", user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -78,7 +79,7 @@ public class FolderCreationValidationTest {
 
     @Test
     public void shouldReturnErrorWhenFolderNameDuplicated() {
-        FolderCreateRequest request = new FolderCreateRequest("testFolderName", null, "testEmail.lv");
+        FolderCreateRequest request = new FolderCreateRequest("testFolderName", null, "testEmail.lv", user);
         FolderCreateResponse response = folderCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
