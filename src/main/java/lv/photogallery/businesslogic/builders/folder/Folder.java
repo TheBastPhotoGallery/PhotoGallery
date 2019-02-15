@@ -18,6 +18,18 @@ public class Folder {
     @Column(name = "files")
     private String files;
 
+    @Column(name = "usrId")
+    private Integer usrId;
+
+    public Integer getUsrId() {
+        return usrId;
+    }
+
+    public void setUsrId(Integer usrId) {
+        this.usrId = usrId;
+    }
+
+
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     //@Column(name = "email", nullable = false)
     //private String email;
