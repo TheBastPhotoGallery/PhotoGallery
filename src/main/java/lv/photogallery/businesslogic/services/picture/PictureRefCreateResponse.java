@@ -1,35 +1,34 @@
-package lv.photogallery.businesslogic.user.userenter;
+package lv.photogallery.businesslogic.services.picture;
 
 import lv.photogallery.businesslogic.ValidationError;
 
 import java.util.List;
 
-public class UserEnterResponse {
-
-    private Long userId;
+public class PictureRefCreateResponse {
+    private Long pictureId;
 
     private boolean success;
 
     private List<ValidationError> errors;
 
-    public UserEnterResponse(Long userId) {
-        this.userId = userId;
+    public PictureRefCreateResponse(Long folderId) {
+        this.pictureId = folderId;
         this.success = true;
         this.errors = null;
     }
 
-    public UserEnterResponse(List<ValidationError> errors) {
-        this.userId = null;
+    public PictureRefCreateResponse(List<ValidationError> errors) {
+        this.pictureId = null;
         this.success = false;
         this.errors = errors;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getPictureId() {
+        return pictureId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPictureId(Long pictureId) {
+        this.pictureId = pictureId;
     }
 
     public boolean isSuccess() {

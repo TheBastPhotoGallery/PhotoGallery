@@ -1,34 +1,35 @@
-package lv.photogallery.businesslogic.folder;
+package lv.photogallery.businesslogic.services.user.userenter;
 
 import lv.photogallery.businesslogic.ValidationError;
 
 import java.util.List;
 
-public class FolderCreateResponse {
-    private Long folderId;
+public class UserEnterResponse {
+
+    private Long userId;
 
     private boolean success;
 
     private List<ValidationError> errors;
 
-    public FolderCreateResponse(Long folderId) {
-        this.folderId = folderId;
+    public UserEnterResponse(Long userId) {
+        this.userId = userId;
         this.success = true;
         this.errors = null;
     }
 
-    public FolderCreateResponse(List<ValidationError> errors) {
-        this.folderId = null;
+    public UserEnterResponse(List<ValidationError> errors) {
+        this.userId = null;
         this.success = false;
         this.errors = errors;
     }
 
-    public Long getFolderId() {
-        return folderId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setFolderId(Long folderId) {
-        this.folderId = folderId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public boolean isSuccess() {
@@ -47,7 +48,3 @@ public class FolderCreateResponse {
         this.errors = errors;
     }
 }
-
-
-
-

@@ -1,9 +1,6 @@
-package lv.photogallery.businesslogic.folder;
+package lv.photogallery.businesslogic.services.folder;
 
 import lv.photogallery.businesslogic.builders.user.User;
-
-import java.io.File;
-import java.util.Map;
 
 public class FolderCreateRequest {
     private String folderName;

@@ -2,9 +2,9 @@ package lv.photogallery.controller;
 
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.user.User;
-import lv.photogallery.businesslogic.user.userregistration.UserRegistrationRequest;
-import lv.photogallery.businesslogic.user.userregistration.UserRegistrationResponse;
-import lv.photogallery.businesslogic.user.userregistration.UserRegistrationService;
+import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationRequest;
+import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationResponse;
+import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +72,7 @@ public class Controller {
         } else {
             return "registration";
         }
+
     }
 }
 

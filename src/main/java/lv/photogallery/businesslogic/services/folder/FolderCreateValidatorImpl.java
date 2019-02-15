@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.folder;
+package lv.photogallery.businesslogic.services.folder;
 
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;

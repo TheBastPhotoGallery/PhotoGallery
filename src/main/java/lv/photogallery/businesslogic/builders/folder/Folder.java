@@ -1,8 +1,10 @@
 package lv.photogallery.businesslogic.builders.folder;
 
+import lv.photogallery.businesslogic.builders.picture.Picture;
 import lv.photogallery.businesslogic.builders.user.User;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "folder")
@@ -21,6 +23,21 @@ public class Folder {
     @Column(name = "usrId")
     private Integer usrId;
 
+    @OneToMany(mappedBy = "pictureURL", fetch = FetchType.EAGER)
+    private Collection<Picture> picturesURLList;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "EMAIL")
+    private User email;
+
+    public Collection<Picture> getPicturesURLList() {
+        return picturesURLList;
+    }
+
+    public void setPicturesURLList(Collection<Picture> picturesURLList) {
+        this.picturesURLList = picturesURLList;
+    }
+
     public Integer getUsrId() {
         return usrId;
     }
@@ -28,13 +45,6 @@ public class Folder {
     public void setUsrId(Integer usrId) {
         this.usrId = usrId;
     }
-
-
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    //@Column(name = "email", nullable = false)
-    //private String email;
-    @JoinColumn(name = "EMAIL")
-    private User email;
 
     public User getEmail() {
         return email;

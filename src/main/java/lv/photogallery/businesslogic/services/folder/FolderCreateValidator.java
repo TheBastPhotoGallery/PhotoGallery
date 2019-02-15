@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.folder;
+package lv.photogallery.businesslogic.services.folder;
 
 import lv.photogallery.businesslogic.ValidationError;
 import java.util.List;

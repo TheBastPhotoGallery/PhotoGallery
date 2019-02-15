@@ -6,24 +6,20 @@ import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
 import lv.photogallery.businesslogic.database.UserRepository;
-import lv.photogallery.businesslogic.folder.FolderCreateRequest;
-import lv.photogallery.businesslogic.folder.FolderCreateResponse;
-import lv.photogallery.businesslogic.folder.FolderCreateService;
-import org.assertj.core.internal.Lists;
+import lv.photogallery.businesslogic.services.folder.FolderCreateRequest;
+import lv.photogallery.businesslogic.services.folder.FolderCreateResponse;
+import lv.photogallery.businesslogic.services.folder.FolderCreateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,6 +1,7 @@
-package lv.photogallery.businesslogic.user.userenter;
-import lv.photogallery.businesslogic.builders.user.User;
+package lv.photogallery.businesslogic.services.user.userregistration;
+
 import lv.photogallery.businesslogic.ValidationError;
+import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,15 +11,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserEnterValidatorImpl implements UserEnterValidator {
+public class UserRegistrationValidationImpl implements UserRegistrationValidator {
     @Autowired
     private UserRepository userRepository;
+
     @Override
-    public List<ValidationError> validate(UserEnterRequest request) {
+    public List<ValidationError> validate(UserRegistrationRequest request) {
         List<ValidationError> errors = new ArrayList<>();
+        validateDuplicateEmail(request.getEmail()).ifPresent(errors::add);
         validatePassword(request.getPassword()).ifPresent(errors::add);
-        validateEmailWithPassword(request.getEmail(), request.getPassword()).ifPresent(errors::add);
-        validateEmail((request.getEmail())).ifPresent(errors::add);
+        validateEmail(request.getEmail()).ifPresent(errors::add);
         return errors;
     }
 
@@ -30,14 +32,11 @@ public class UserEnterValidatorImpl implements UserEnterValidator {
         }
     }
 
-    private Optional<ValidationError> validateEmailWithPassword(String email, String password) {
+    private Optional<ValidationError> validateDuplicateEmail(String email) {
         if (email != null && !email.isEmpty()) {
             Optional<User> userOpt = userRepository.findByEmail(email);
-            if (!userOpt.isPresent()) {
-                return Optional.of(new ValidationError("email", "Such email not found"));
-            }
-            if (!userOpt.get().getPassword().equals(password)){
-                return  Optional.of(new ValidationError("password", "Incorrect password"));
+            if (userOpt.isPresent()) {
+                return Optional.of(new ValidationError("email", "Must not be repeated"));
             }
         }
         return Optional.empty();

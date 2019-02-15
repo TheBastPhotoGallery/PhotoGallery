@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.folder;
+package lv.photogallery.businesslogic.services.folder;
 
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
@@ -6,7 +6,6 @@ import lv.photogallery.businesslogic.database.FolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 import static lv.photogallery.businesslogic.builders.folder.FolderBuilder.createFolder;

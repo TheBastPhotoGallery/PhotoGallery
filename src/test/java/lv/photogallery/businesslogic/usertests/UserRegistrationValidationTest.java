@@ -4,14 +4,12 @@ import lv.photogallery.SpringComponentConfig;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
-import lv.photogallery.businesslogic.user.userregistration.*;
+import lv.photogallery.businesslogic.services.user.userregistration.*;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 

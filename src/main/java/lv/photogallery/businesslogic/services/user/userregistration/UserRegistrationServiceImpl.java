@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.user.userregistration;
+package lv.photogallery.businesslogic.services.user.userregistration;
 
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.user.User;
