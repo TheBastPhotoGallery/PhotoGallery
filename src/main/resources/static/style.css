@@ -1,0 +1,12 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+body {
+    background: #777777; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, darkslategray, lightsteelblue);
+    background: -moz-linear-gradient(right, darkslategray, lightsteelblue);
+    background: -o-linear-gradient(right, darkslategray, lightsteelblue);
+    background: linear-gradient(to left, darkslategray, lightsteelblue);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

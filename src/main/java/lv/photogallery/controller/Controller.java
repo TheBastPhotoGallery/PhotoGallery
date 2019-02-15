@@ -1,11 +1,13 @@
 package lv.photogallery.controller;
 
 import lv.photogallery.businesslogic.builders.folder.Folder;
+import lv.photogallery.businesslogic.builders.user.User;
+import lv.photogallery.businesslogic.user.userregistration.UserRegistrationRequest;
+import lv.photogallery.businesslogic.user.userregistration.UserRegistrationResponse;
+import lv.photogallery.businesslogic.user.userregistration.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.database.FolderRepository;
 
@@ -16,6 +18,9 @@ import java.util.Map;
 public class Controller {
     @Autowired
     private FolderRepository folderRepo;
+
+    @Autowired
+    private UserRegistrationService userRegistrationService;
 
     @RequestMapping("/")
     public String index() {
@@ -29,21 +34,12 @@ public class Controller {
         return "login";
     }
 
-    @RequestMapping("/registration")
-    public String registration() {
-
-        return "registration";
-    }
-    @RequestMapping("/gallery")
-    public String gallery() {
-
-        return "gallery";
-    }
     @RequestMapping("/dashboard")
     public String dashboard() {
 
         return "dashboard";
     }
+
     @RequestMapping("/admin")
     public String admin() {
 
@@ -52,10 +48,30 @@ public class Controller {
 
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, Map<String, Object> model) {
-        Iterable<Folder> folders= folderRepo.findByUsrId(usrId);
+        Iterable<Folder> folders = folderRepo.findByUsrId(usrId);
 
         model.put("folders", folders);
         return "myphotos";
     }
 
+
+    @RequestMapping("/registration")
+    @ResponseBody
+    public String registration(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String password) {
+
+
+        User user = new User();
+        UserRegistrationRequest registrationRequest = new UserRegistrationRequest(user.getEmail(), user.getPassword());
+        UserRegistrationResponse registrationResponse = userRegistrationService.register(registrationRequest);
+
+        if (registrationResponse.isSuccess()) {
+            return "dashboard";
+        }
+        if (registrationResponse.isSuccess() && email == "admin@admin.com") {
+            return "admin";
+        } else {
+            return "registration";
+        }
+    }
 }
+

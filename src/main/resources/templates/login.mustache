@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/resources/static/css/main.css">
+    <link href="/style.css" rel="stylesheet">
     <title>login</title>
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 
         .login-page {
             width: 360px;
@@ -43,9 +44,8 @@
             border: 0;
             padding: 15px;
             color: #FFFFFF;
-            font-size: 14px;
-            -webkit-transition: all 0.3 ease;
-            transition: all 0.3 ease;
+
+
             cursor: pointer;
         }
         .form button:hover,.form button:active,.form button:focus {
@@ -96,16 +96,7 @@
         .container .info span .fa {
             color: #EF3B3A;
         }
-        body {
-            background: #777777; /* fallback for old browsers */
-            background: -webkit-linear-gradient(right, darkslategray, lightsteelblue);
-            background: -moz-linear-gradient(right, darkslategray, lightsteelblue);
-            background: -o-linear-gradient(right, darkslategray, lightsteelblue);
-            background: linear-gradient(to left, darkslategray, lightsteelblue);
-            font-family: "Roboto", sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+
     </style>
 </head>
 <body>
@@ -113,18 +104,12 @@
 
 <div class="login-page">
     <div class="form">
-        <form class="register-form">
+        <form action="login-form">
 
             <input type="text" placeholder="email address"/>
             <input type="password" placeholder="password"/>
-            <button>create</button>
-            <p class="message">Already registered? <a href="#">Sign In</a></p>
-        </form>
-        <form class="login-form">
-            <input type="text" placeholder="email address"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
-            <p class="message">Not registered? <a href="/registration">Create an account</a></p>
+            <input type="submit" value="Login">
+            <p class="message">Not registered? <a href=/registration>Create an account</a></p>
         </form>
     </div>
 </div>
