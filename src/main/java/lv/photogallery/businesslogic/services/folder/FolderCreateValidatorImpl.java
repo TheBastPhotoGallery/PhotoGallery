@@ -37,7 +37,7 @@ public class FolderCreateValidatorImpl implements FolderCreateValidator {
 
     private Optional<ValidationError> validateDuplicateFolderName(String name, String email) {
         if (name != null && !name.isEmpty()) {
-            Iterable<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail(email).get().getId().intValue());
+            Collection<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail(email).get().getId().intValue());
             for (Folder folder : folders) {
                 if (folder.getFolderName().equals(name)) {
                     return Optional.of(new ValidationError("folderName", "Must not be repeated"));

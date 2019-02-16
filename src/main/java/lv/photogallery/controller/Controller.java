@@ -12,6 +12,7 @@ import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.database.FolderRepository;
 
 
+import java.util.Collection;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
@@ -48,7 +49,7 @@ public class Controller {
 
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, Map<String, Object> model) {
-        Iterable<Folder> folders = folderRepo.findByUsrId(usrId);
+        Collection<Folder> folders = folderRepo.findByUsrId(usrId);
 
         model.put("folders", folders);
         return "myphotos";

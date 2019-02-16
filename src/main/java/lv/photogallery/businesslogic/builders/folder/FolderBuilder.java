@@ -37,7 +37,7 @@ public class FolderBuilder {
         return this;
     }
     public FolderBuilder withUsrId(Integer id) {
-        this.usrId = usrId;
+        this.usrId = id;
         return this;
     }
 

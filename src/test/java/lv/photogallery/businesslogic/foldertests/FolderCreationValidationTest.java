@@ -57,7 +57,7 @@ public class FolderCreationValidationTest {
     public void testingOfFolderRepositoryTest(){
         assertEquals("testFolderName", folderRepository.findByFolderName("testFolderName").get().getFolderName());
         userRepository.findByEmail("testEmail").get().getId();
-        Iterable<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail("testEmail").get().getId().intValue());
+        Collection<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail("testEmail").get().getId().intValue());
         assertEquals(folders.iterator().next().getFolderName(), "testFolderName");
     }
 
@@ -86,20 +86,10 @@ public class FolderCreationValidationTest {
         FolderCreateRequest request = new FolderCreateRequest("testFolderName2", null, user);
         FolderCreateResponse response = folderCreateService.create(request);
         assertEquals(response.isSuccess(), true);
-       // Collection<Folder> folders = userRepository.findByEmail("testEmail").get().getFolderList();
-        Iterable<Folder> f = folderRepository.findByUsrId(user.getId().intValue());
-        //System.out.println(sf);
-//        System.out.println("ssss");
-    for(Folder ff : f){
-        System.out.println(ff.getFolderName());
-    }
-//
-//
-// for (Folder f : folders){
-//            System.out.println(f.getFolderName());
-//        }
-//        assertEquals(folders.size(),2);
-//        assertEquals(folders.stream().skip(1).findFirst().orElse(null).getFolderName(),"testFolderName2");
+        Collection<Folder> folders = folderRepository.findByUsrId(user.getId().intValue());
+        //folders.forEach (e -> System.out.println(e.getFolderName()) );
+       assertEquals(folders.iterator().next().getFolderName(),"testFolderName");
+       assertEquals(folders.stream().skip(1).findFirst().orElse(null).getFolderName(),"testFolderName2");
     }
 
 }

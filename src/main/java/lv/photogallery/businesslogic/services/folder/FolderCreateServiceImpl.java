@@ -30,9 +30,8 @@ public class FolderCreateServiceImpl implements FolderCreateService {
         Folder folder = createFolder()
                 .withFolderName(request.getFolderName())
                 .withFiles(request.getFile())
-                .withUsrId(request.getUser().getId().intValue())
+                .withUsrId(Integer.valueOf(request.getUser().getId().intValue()))
                 .build();
-
         folderRepository.save(folder);
 
         return new FolderCreateResponse(folder.getId());
