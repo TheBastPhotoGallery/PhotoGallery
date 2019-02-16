@@ -23,19 +23,19 @@ public class Folder {
     @Column(name = "usrId")
     private Integer usrId;
 
-    @OneToMany(mappedBy = "pictureURL", fetch = FetchType.EAGER)
-    private Collection<Picture> picturesURLList;
+    @OneToMany(mappedBy = "folder", fetch = FetchType.EAGER)
+    private Collection<Picture> picturesPathList;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "EMAIL")
     private User email;
 
-    public Collection<Picture> getPicturesURLList() {
-        return picturesURLList;
+    public Collection<Picture> getPicturesPathList() {
+        return picturesPathList;
     }
 
-    public void setPicturesURLList(Collection<Picture> picturesURLList) {
-        this.picturesURLList = picturesURLList;
+    public void setPicturesPathList(Collection<Picture> picturesURLList) {
+        this.picturesPathList = picturesURLList;
     }
 
     public Integer getUsrId() {
@@ -73,7 +73,7 @@ public class Folder {
         return files;
     }
 
-    public void setFiles(String files) {
+    public void setFolderPicture(String files) {
         this.files = files;
     }
 

@@ -1,8 +1,5 @@
 package lv.photogallery.businesslogic.builders.picture;
 
-import lv.photogallery.businesslogic.builders.folder.Folder;
-import lv.photogallery.businesslogic.builders.folder.FolderBuilder;
-
 public class PictureBuilder {
     private Long id;
     private String pictureURL;
@@ -16,7 +13,7 @@ public class PictureBuilder {
     public Picture build() {
         Picture picture = new Picture();
         picture.setId(id);
-        picture.setPictureURL(pictureURL);
+        picture.setPicturePath(pictureURL);
         return picture;
     }
 

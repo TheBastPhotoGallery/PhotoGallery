@@ -25,7 +25,6 @@ public class PictureRefCreateServiceImpl implements PictureRefCreateService {
         if (!validationErrors.isEmpty()) {
             return new PictureRefCreateResponse(validationErrors);
         }
-
         Picture picture = createPicture()
                 .withURL(request.getPictureURL())
                 .build();

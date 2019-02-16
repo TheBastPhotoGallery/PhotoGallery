@@ -3,7 +3,6 @@ package lv.photogallery.businesslogic.services.picture;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
-import lv.photogallery.businesslogic.database.FolderRepository;
 import lv.photogallery.businesslogic.database.PictureRepository;
 import lv.photogallery.businesslogic.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,12 @@ public class PictureRefCreateValidatorImpl implements PictureRefCreateValidator 
     @Override
     public List<ValidationError> validate(PictureRefCreateRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validatePicture(request.getFolderName()).ifPresent(errors::add);
+        validatePictureNotEmpty(request.getPictureURL()).ifPresent(errors::add);
         validateDuplicatePicture(request.getPictureURL(), request.getUser().getEmail(), request.getFolderName()).ifPresent(errors::add);
         return errors;
     }
 
-    private Optional<ValidationError> validatePicture(String url) {
+    private Optional<ValidationError> validatePictureNotEmpty(String url) {
         if (url == null || url.isEmpty()) {
             return Optional.of(new ValidationError("picture", "Must not be empty"));
         } else {
@@ -43,9 +42,11 @@ public class PictureRefCreateValidatorImpl implements PictureRefCreateValidator 
             Collection<Folder> collection = userRepository.findByEmail(email).get().getFolderList();
             for (Folder folder : collection) {
                 if (folder.getFolderName().equals(folderName)) {
-                    Iterable<Picture> pictures = pictureRepository.findByFolderId(folder.getId());
-                    if (StreamSupport.stream(pictures.spliterator(), false).anyMatch(p -> p.equals(url)))
-                        return Optional.of(new ValidationError("picture", "Must not be repeated"));
+                    Collection<Picture> pictures = pictureRepository.findByFolderId(folder.getId());
+                    for (Picture p : pictures){
+                        if (p.getPicturePath().equals(url))
+                            return Optional.of(new ValidationError("picture", "Must not be repeated"));
+                    }
                 }
             }
         }

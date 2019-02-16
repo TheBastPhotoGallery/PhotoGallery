@@ -5,7 +5,9 @@ import lv.photogallery.businesslogic.builders.picture.Picture;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
 @Repository
 public interface PictureRepository extends CrudRepository<Picture, Integer> {
-    Iterable<Picture> findByFolderId(Long folderId);
+    Collection<Picture> findByFolderId(Long folderId);
 }

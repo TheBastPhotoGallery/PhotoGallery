@@ -16,7 +16,7 @@ public class FolderBuilder {
     public Folder build() {
         Folder folder = new Folder();
         folder.setId(id);
-        folder.setFiles(files);
+        folder.setFolderPicture(files);
         folder.setFolderName(folderName);
        // folder.setEmail(clientEmail);
         return folder;

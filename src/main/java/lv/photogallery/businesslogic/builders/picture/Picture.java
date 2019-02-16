@@ -7,11 +7,12 @@ import javax.persistence.*;
 @Table(name = "picture")
 public class Picture {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "pictureurl")
-    private String pictureURL;
+    @Column(name = "picturePath", nullable = false)
+    private String picturePath;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "folder_id")
@@ -25,11 +26,20 @@ public class Picture {
         this.id = id;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
+
+    public Folder getFolder() {
+        return folder;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setFolder(Folder folder) {
+        this.folder = folder;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 }
