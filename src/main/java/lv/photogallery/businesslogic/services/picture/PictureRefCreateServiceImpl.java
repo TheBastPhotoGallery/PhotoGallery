@@ -27,7 +27,7 @@ public class PictureRefCreateServiceImpl implements PictureRefCreateService {
         }
         Picture picture = createPicture()
                 .withPath(request.getPicturePath())
-                //.withFolderId(request.getFolderName())
+                .withFolderId(request.getFolder().getId())
                 .build();
 
         pictureRepository.save(picture);

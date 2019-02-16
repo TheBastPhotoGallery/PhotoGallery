@@ -71,7 +71,7 @@ public class PictureValidationTest {
 
     @Test
     public void shouldReturnErrorWhenPictureIsNullTest() {
-        PictureRefCreateRequest request = new PictureRefCreateRequest("testFolderName", null, user);
+        PictureRefCreateRequest request = new PictureRefCreateRequest(folder, null, user);
         PictureRefCreateResponse response = pictureRefCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -81,7 +81,7 @@ public class PictureValidationTest {
 
     @Test
     public void shouldReturnErrorWhenPictureNameDuplicatedTest() {
-        PictureRefCreateRequest request = new PictureRefCreateRequest("testFolderName", "testPicturePath", user);
+        PictureRefCreateRequest request = new PictureRefCreateRequest(folder, "testPicturePath", user);
         PictureRefCreateResponse response = pictureRefCreateService.create(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);

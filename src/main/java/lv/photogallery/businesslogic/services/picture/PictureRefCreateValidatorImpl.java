@@ -27,7 +27,7 @@ public class PictureRefCreateValidatorImpl implements PictureRefCreateValidator 
     public List<ValidationError> validate(PictureRefCreateRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         validatePictureNotEmpty(request.getPicturePath()).ifPresent(errors::add);
-        validateDuplicatePicture(request.getPicturePath(), request.getUser().getEmail(), request.getFolderName()).ifPresent(errors::add);
+        validateDuplicatePicture(request.getPicturePath(), request.getUser().getEmail(), request.getFolder().getFolderName()).ifPresent(errors::add);
         return errors;
     }
 
