@@ -30,13 +30,13 @@ public class UserRegistrationValidationTest {
     @Before
     public void setUp() {
 
-        user.setEmail("testEmail");
+        user.setEmail("test@Email");
         user.setPassword("testPassword");
         userRepository.save(user);
     }
 
     @Test
-    public void shouldReturnErrorWhenEmailIsNull() {
+    public void shouldReturnErrorWhenEmailIsNullTest() {
         UserRegistrationRequest request = new UserRegistrationRequest(null, "password");
         UserRegistrationResponse response = service.register(request);
         List<ValidationError> errors = response.getErrors();
@@ -46,8 +46,8 @@ public class UserRegistrationValidationTest {
     }
     @Test
 
-    public void shouldReturnErrorWhenPasswordIsNull() {
-        UserRegistrationRequest request = new UserRegistrationRequest("testEmail2", null);
+    public void shouldReturnErrorWhenPasswordIsNullTest() {
+        UserRegistrationRequest request = new UserRegistrationRequest("test@Email2", null);
         UserRegistrationResponse response = service.register(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
@@ -56,12 +56,32 @@ public class UserRegistrationValidationTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenEmailDuplicated(){
-        UserRegistrationRequest request = new UserRegistrationRequest("testEmail", "testPassword");
+    public void shouldReturnErrorWhenEmailDuplicatedTest(){
+        UserRegistrationRequest request = new UserRegistrationRequest("test@Email", "testPassword");
         UserRegistrationResponse response = service.register(request);
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "email");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenEmailNotContainAtTest(){
+        UserRegistrationRequest request = new UserRegistrationRequest("testEmailNotValid", "testPassword");
+        UserRegistrationResponse response = service.register(request);
+        List<ValidationError> errors = response.getErrors();
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "email");
+        assertEquals(errors.get(0).getErrorMessage(), "Must be valid");
+    }
+
+    @Test
+    public void shouldReturnRegistrationTrueTest(){
+        UserRegistrationRequest request = new UserRegistrationRequest("testEmail@Valid", "testPassword");
+        UserRegistrationResponse response = service.register(request);
+        List<ValidationError> errors = response.getErrors();
+        assertEquals(response.isSuccess(), true);
+        assertEquals(response.getUserId().intValue(), user.getId().intValue() + 1);
+
     }
 }

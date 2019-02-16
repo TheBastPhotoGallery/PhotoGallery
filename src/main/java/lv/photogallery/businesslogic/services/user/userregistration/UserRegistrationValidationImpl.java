@@ -45,7 +45,9 @@ public class UserRegistrationValidationImpl implements UserRegistrationValidator
     private Optional<ValidationError> validateEmail(String email) {
         if (email == null || email.isEmpty()) {
             return Optional.of(new ValidationError("email", "Must not be empty"));
-        }else {
+        }else if (!email.contains("@")){
+            return Optional.of(new ValidationError("email", "Must be valid"));
+        }else{
             return Optional.empty();
         }
     }

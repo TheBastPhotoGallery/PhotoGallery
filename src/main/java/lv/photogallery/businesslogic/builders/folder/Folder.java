@@ -14,7 +14,7 @@ public class Folder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "folderName", nullable = false)
+    @Column(name = "folderName")
     private String folderName;
 
     @Column(name = "files")
@@ -22,21 +22,6 @@ public class Folder {
 
     @Column(name = "usrId")
     private Integer usrId;
-
-    @OneToMany(mappedBy = "folder", fetch = FetchType.EAGER)
-    private Collection<Picture> picturesPathList;
-
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "EMAIL")
-    private User email;
-
-    public Collection<Picture> getPicturesPathList() {
-        return picturesPathList;
-    }
-
-    public void setPicturesPathList(Collection<Picture> picturesURLList) {
-        this.picturesPathList = picturesURLList;
-    }
 
     public Integer getUsrId() {
         return usrId;
@@ -46,13 +31,6 @@ public class Folder {
         this.usrId = usrId;
     }
 
-    public User getEmail() {
-        return email;
-    }
-
-    public void setEmail(User email) {
-        this.email = email;
-    }
     public String getFolderName() {
         return folderName;
     }

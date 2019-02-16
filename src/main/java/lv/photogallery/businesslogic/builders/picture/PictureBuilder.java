@@ -2,9 +2,11 @@ package lv.photogallery.businesslogic.builders.picture;
 
 public class PictureBuilder {
     private Long id;
-    private String pictureURL;
+    private String picturePath;
+    private Long folderId;
 
-    private PictureBuilder() {}
+    private PictureBuilder() {
+    }
 
     public static PictureBuilder createPicture() {
         return new PictureBuilder();
@@ -13,28 +15,33 @@ public class PictureBuilder {
     public Picture build() {
         Picture picture = new Picture();
         picture.setId(id);
-        picture.setPicturePath(pictureURL);
+        picture.setPicturePath(picturePath);
+        picture.setFolderId(folderId);
         return picture;
     }
-
 
     public PictureBuilder withId(Long id) {
         this.id = id;
         return this;
     }
 
-    public PictureBuilder withURL(String url) {
-        this.pictureURL = url;
+    public PictureBuilder withPath(String url) {
+        this.picturePath = url;
+        return this;
+    }
+
+    public PictureBuilder withFolderId(Long id) {
+        this.folderId = id;
         return this;
     }
 
 
-    public String getPictureURL() {
-        return pictureURL;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
 }

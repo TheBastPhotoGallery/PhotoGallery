@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,19 +42,23 @@ public class FolderCreationValidationTest {
     public void setUp() {
         user.setEmail("testEmail");
         user.setPassword("testPassword");
-        folder.setFolderName("testFolderName");
-        folder.setEmail(user);
-        folder.setFolderPicture("");
-        user.setFolderList(Collections.singletonList(folder));
+
+
+       // user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
+        folder.setUsrId(user.getId().intValue());
+        folder.setFolderName("testFolderName");
+        //folder.setEmail(user);
+        folder.setFolderPicture("");
         folderRepository.save(folder);
     }
 
     @Test
     public void testingOfFolderRepositoryTest(){
         assertEquals("testFolderName", folderRepository.findByFolderName("testFolderName").get().getFolderName());
-        Collection<Folder> folders = userRepository.findByEmail("testEmail").get().getFolderList();
-        assertEquals("testFolderName", folders.stream().findFirst().get().getFolderName());
+        userRepository.findByEmail("testEmail").get().getId();
+        Iterable<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail("testEmail").get().getId().intValue());
+        assertEquals(folders.iterator().next().getFolderName(), "testFolderName");
     }
 
     @Test
@@ -66,20 +71,6 @@ public class FolderCreationValidationTest {
         assertEquals(errors.get(0).getErrorMessage(), "Must not be empty");
     }
 
-//    @Test
-//    public void shouldReturnErrorWhenEmailDuplicated() {
-//       List<Folder> f =( List<Folder>) folderRepository.findAll();
-//       for (Folder ff : f){
-//           System.out.println(ff.getEmail().getEmail());
-//       }
-//        FolderCreateRequest request = new FolderCreateRequest("folderNameTest", null,  user);
-//        FolderCreateResponse response = folderCreateService.create(request);
-//        List<ValidationError> errors = response.getErrors();
-//        assertEquals(errors.size(), 1);
-//        assertEquals(errors.get(0).getField(), "email");
-//        assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
-//    }
-
     @Test
     public void shouldReturnErrorWhenFolderNameDuplicatedTest() {
         FolderCreateRequest request = new FolderCreateRequest("testFolderName", null, user);
@@ -88,6 +79,27 @@ public class FolderCreationValidationTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "folderName");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
+    }
+
+    @Test
+    public void shouldReturnManyFoldersForOneUserTest(){
+        FolderCreateRequest request = new FolderCreateRequest("testFolderName2", null, user);
+        FolderCreateResponse response = folderCreateService.create(request);
+        assertEquals(response.isSuccess(), true);
+       // Collection<Folder> folders = userRepository.findByEmail("testEmail").get().getFolderList();
+        Iterable<Folder> f = folderRepository.findByUsrId(user.getId().intValue());
+        //System.out.println(sf);
+//        System.out.println("ssss");
+    for(Folder ff : f){
+        System.out.println(ff.getFolderName());
+    }
+//
+//
+// for (Folder f : folders){
+//            System.out.println(f.getFolderName());
+//        }
+//        assertEquals(folders.size(),2);
+//        assertEquals(folders.stream().skip(1).findFirst().orElse(null).getFolderName(),"testFolderName2");
     }
 
 }

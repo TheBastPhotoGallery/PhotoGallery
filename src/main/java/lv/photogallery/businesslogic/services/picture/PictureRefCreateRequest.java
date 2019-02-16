@@ -4,12 +4,12 @@ import lv.photogallery.businesslogic.builders.user.User;
 
 public class PictureRefCreateRequest {
     private String folderName;
-    private String pictureURL;
+    private String picturePath;
     private User user;
 
     public PictureRefCreateRequest(String folderName, String pictureName, User user) {
         this.folderName = folderName;
-        this.pictureURL = pictureName;
+        this.picturePath = pictureName;
         this.user = user;
     }
 
@@ -29,11 +29,11 @@ public class PictureRefCreateRequest {
         this.folderName = folderName;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 }

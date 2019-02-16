@@ -19,19 +19,19 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "email", fetch = FetchType.EAGER)
-    private Collection<Folder> folderList;
+//    @OneToMany(mappedBy = "email", fetch = FetchType.EAGER)
+//    private Collection<Folder> folderList;
 
-    public Collection<Folder> getFolderList() {
-        return folderList;
-    }
-
-    public void setFolderList(Collection<Folder> folderList) {
-        this.folderList = folderList;
-    }
+//    public Collection<Folder> getFolderList() {
+//        return folderList;
+//    }
+//
+//    public void setFolderList(Collection<Folder> folderList) {
+//        this.folderList = folderList;
+//    }
 
     public String getEmail() {
         return email;

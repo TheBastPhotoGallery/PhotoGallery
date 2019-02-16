@@ -5,7 +5,7 @@ public class FolderBuilder {
     private Long id;
     private String files;
     private String folderName;
-    private String clientEmail;
+    private Integer usrId;
 
     private FolderBuilder() {}
 
@@ -18,17 +18,12 @@ public class FolderBuilder {
         folder.setId(id);
         folder.setFolderPicture(files);
         folder.setFolderName(folderName);
-       // folder.setEmail(clientEmail);
+        folder.setUsrId(usrId);
         return folder;
     }
 
-    public FolderBuilder withFolderName(String foldername) {
+    public FolderBuilder withFolderName(String folderName) {
         this.folderName = folderName;
-        return this;
-    }
-
-    public FolderBuilder withEmail(String email) {
-        this.clientEmail = email;
         return this;
     }
 
@@ -39,6 +34,10 @@ public class FolderBuilder {
 
     public FolderBuilder withFiles(String file) {
         this.files = file;
+        return this;
+    }
+    public FolderBuilder withUsrId(Integer id) {
+        this.usrId = usrId;
         return this;
     }
 

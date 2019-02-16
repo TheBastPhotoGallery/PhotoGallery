@@ -20,7 +20,7 @@ public class UserRealRepositoryInputValidateTest {
     private UserRepository userRepository;
 
     @Test
-    public void inputToRepoTest(){
+    public void inputToRealRepositoryTest(){
 
         User user = new User();
         user.setEmail("tesEmail");

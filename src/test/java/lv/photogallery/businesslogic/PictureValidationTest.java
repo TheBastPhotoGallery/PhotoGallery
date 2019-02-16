@@ -48,24 +48,25 @@ public class PictureValidationTest {
         user.setEmail("testEmail");
         user.setPassword("testPassword");
         folder.setFolderName("testFolderName");
-        folder.setEmail(user);
         folder.setFolderPicture("");
-        user.setFolderList(Collections.singletonList(folder));
-        folder.setPicturesPathList(Collections.singletonList(picture));
-        picture.setFolder(folder);
         picture.setPicturePath("testPicturePath");
 
         userRepository.save(user);
+        folder.setUsrId(user.getId().intValue());
         folderRepository.save(folder);
+        picture.setFolderId(folder.getId());
         pictureRepository.save(picture);
     }
 
     @Test
     public void testingOfPictureRepositoryTest() {
-        Collection<Folder> folders = userRepository.findByEmail("testEmail").get().getFolderList();
-        assertEquals("testFolderName", folders.stream().findFirst().get().getFolderName());
-        Collection<Picture> pictures = pictureRepository.findByFolderId(folders.stream().findFirst().get().getId());
+
+        Iterable<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail("testEmail").get().getId().intValue());
+        assertEquals("testFolderName", folders.iterator().next().getFolderName());
+        Long folderId = folders.iterator().next().getId();
+        Collection<Picture> pictures = pictureRepository.findByFolderId(folderId);
         assertEquals("testPicturePath", pictures.stream().findFirst().get().getPicturePath());
+        
     }
 
     @Test
