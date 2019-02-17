@@ -6,70 +6,99 @@
 <link href="/style.css" rel="stylesheet">
 <head>
     <style>
+        .in {
+            background-color: darkgray;
+        }
+        div.w3-container {
+            margin: 50px;
+            width: auto;
+            padding: 25px;
 
-
-        .form button:hover,.form button:active,.form button:focus {
-            background: #1a1a1a;
         }
 
-
-        .form .message a {
-            color: #1a1a1a;
+        h1{
+            font-size: 50px;
+        }
+        .container{
+            margin: 2%;
+            padding-bottom: 3%;
+            padding-right: 10%;
+            padding-left: 10%;
+        }
+        .log {
+            margin-left: 86%;
+        }
+        .ab {
+            margin-left: 83.5%;
+        }
+        .login {
+            margin-left: inherit;
             text-decoration: none;
 
         }
-        .container {
-            position: fixed;
-            z-index: 1;
-            max-width: 300px;
-            margin: 0 auto;
+        button {
+            background-color: darkgray;
+            border: none;
+            color: darkslategrey;
+            padding: 10px 25px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
         }
 
 
-
+        button:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
     </style>
     <title>start</title>
 
 <body>
 
-
-<div>
- <a class="nav-link" href="/login">login</a>
- </div>
-
 <div class="container">
-    <div class="leftBottom"></div>
-    <form action="/action_page.php">
-    <div class="w3-container w3-gray">
-    <input type="checkbox" name="weddings" value="Weddings"> Weddings<br>
+    <div class="log">
+        <button><a class="login" href="/login">login</a></button>
+    </div>
+    <div class="ab">
+        <button><a class="login" href="/about">About us</a></button>
     </div>
 
-     <div class="w3-container w3-gray">
-         <input type="checkbox" name="kids" value="Kids"> Kids<br>
+    <h1>Welcome to our photoservice</h1>
 
+    <h2>Pick up theme for photosession</h2>
+
+
+    <div class="leftBottom">
+        <form action="/">
+
+            <div class="w3-container w3-gray">
+                <input type="checkbox" name="weddings" value="Weddings"> Weddings<br>
+            </div>
+
+            <div class="w3-container w3-gray">
+                <input type="checkbox" class="in" name="kids" value="Kids"> Kids<br>
+            </div>
+
+            <div class="w3-container w3-gray">
+                <input type="checkbox" name="other" value="Other"> Other<br>
+            </div>
+
+            <div>
+                <h2>Pick up date and time</h2>
+                <div>
+                    here have to be a calendar
+                </div>
+                <div>
+                    Enter your e-mail: <input class="in" type="text" name="email"><br>
+                    <input type="submit" onclick="" value="Submit">
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="w3-container w3-gray">
-        <input type="checkbox" name="other" value="Other"> Other<br>
-    </div>
-
-    <input type="submit" value="Submit">
-    </form>
-
-    <div>
-    <a class="link" href="/dashboard"> <div class="w3-container w3-gray">
-        My Files
-    </div></a>
-    <div>
-        <p>calendar</p>
-        <div>
-            <form>
-                Enter your e-mail: <input type="text" name="email"><br>
-
-                <input type="button" onclick="" value="Submit">
-            </form>
-        </div>
-    </div>
-</div>
 </div>
 </body>
 </html>
+
