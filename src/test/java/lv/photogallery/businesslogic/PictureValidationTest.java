@@ -1,6 +1,6 @@
 package lv.photogallery.businesslogic;
 
-import lv.photogallery.SpringComponentConfig;
+import lv.photogallery.SpringComponentForTestConfig;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
 import lv.photogallery.businesslogic.builders.user.User;
@@ -19,15 +19,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-import static java.lang.Math.toIntExact;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Import(SpringComponentConfig.class)
+@Import(SpringComponentForTestConfig.class)
 public class PictureValidationTest {
     @Autowired
     private FolderRepository folderRepository;
@@ -87,5 +85,15 @@ public class PictureValidationTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "picture");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated");
+    }
+
+    @Test
+    public void shouldReturnManyPictureForFolderTest(){
+        PictureRefCreateRequest request = new PictureRefCreateRequest(folder, "testPicturePath2", user);
+        PictureRefCreateResponse response = pictureRefCreateService.create(request);
+        assertEquals(response.isSuccess(), true);
+        Collection<Picture> pictures = pictureRepository.findByFolderId(folder.getId());
+        assertEquals(pictures.iterator().next().getPicturePath(),"testPicturePath");
+        assertEquals(pictures.stream().skip(1).findFirst().orElse(null).getPicturePath(),"testPicturePath2");
     }
 }

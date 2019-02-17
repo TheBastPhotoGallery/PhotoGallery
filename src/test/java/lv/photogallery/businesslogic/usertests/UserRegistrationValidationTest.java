@@ -1,6 +1,6 @@
 package lv.photogallery.businesslogic.usertests;
 
-import lv.photogallery.SpringComponentConfig;
+import lv.photogallery.SpringComponentForTestConfig;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Import(SpringComponentConfig.class)
+@Import(SpringComponentForTestConfig.class)
 public class UserRegistrationValidationTest {
     @Autowired
     private UserRepository userRepository;

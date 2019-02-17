@@ -1,6 +1,6 @@
 package lv.photogallery.businesslogic.foldertests;
 
-import lv.photogallery.SpringComponentConfig;
+import lv.photogallery.SpringComponentForTestConfig;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.user.User;
@@ -18,15 +18,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Import(SpringComponentConfig.class)
+@Import(SpringComponentForTestConfig.class)
 public class FolderCreationValidationTest {
     @Autowired
     private FolderRepository folderRepository;
@@ -88,8 +86,8 @@ public class FolderCreationValidationTest {
         assertEquals(response.isSuccess(), true);
         Collection<Folder> folders = folderRepository.findByUsrId(user.getId().intValue());
         //folders.forEach (e -> System.out.println(e.getFolderName()) );
-       assertEquals(folders.iterator().next().getFolderName(),"testFolderName");
-       assertEquals(folders.stream().skip(1).findFirst().orElse(null).getFolderName(),"testFolderName2");
+        assertEquals(folders.iterator().next().getFolderName(),"testFolderName");
+        assertEquals(folders.stream().skip(1).findFirst().orElse(null).getFolderName(),"testFolderName2");
     }
 
 }

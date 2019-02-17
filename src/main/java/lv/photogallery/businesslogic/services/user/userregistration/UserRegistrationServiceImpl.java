@@ -3,6 +3,9 @@ package lv.photogallery.businesslogic.services.user.userregistration;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
+import lv.photogallery.businesslogic.services.picture.PictureRefCreateServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private UserRegistrationValidator validator;
     @Autowired
     private UserRepository userRepository;
+    private Logger logger = LoggerFactory.getLogger(UserRegistrationServiceImpl.class);
 
     @Override
     public UserRegistrationResponse register(UserRegistrationRequest request) {
@@ -34,6 +38,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 
         userRepository.save(user);
+
+        logger.info("New user with email " + user.getEmail() + " was saved in DB");
 
         return new UserRegistrationResponse(user.getId());
     }

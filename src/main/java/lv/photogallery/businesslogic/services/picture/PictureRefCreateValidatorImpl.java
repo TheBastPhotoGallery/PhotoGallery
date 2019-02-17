@@ -41,7 +41,7 @@ public class PictureRefCreateValidatorImpl implements PictureRefCreateValidator 
 
     private Optional<ValidationError> validateDuplicatePicture(String url, String email, String folderName) {
         if (url != null && !url.isEmpty()) {
-            Iterable<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail(email).get().getId().intValue());
+            Collection<Folder> folders = folderRepository.findByUsrId(userRepository.findByEmail(email).get().getId().intValue());
 
             for (Folder folder : folders) {
                 if (folder.getFolderName().equals(folderName)) {
