@@ -1,55 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<html>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
 
-    <link href="https://unpkg.com/nanogallery2/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="https://unpkg.com/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
+        .myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
+        .myImg:hover {opacity: 0.7;}
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image */
+        .caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation */
+        .modal-content, #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(0)}
+            to {-webkit-transform:scale(1)}
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-<div align="right" style="padding: 10px 10px 10px 10px;">
-    <form action="/" method="post">
-        <div><input type="submit" value="Sign Out"/></div>
-    </form>
-</div>
+<table>
+    <tbody>
+        <tr style="width:100%">
+            <td valign="top" style="width:30%">
 
-
-<div >
-
-    <div style="width:80%;">
-        <h2>Your photos:</h2>
-        <div ID="ngy2p" data-nanogallery2='{
-            "thumbnailWidth": "200",
-            "thumbnailAlignment": "center"
-          }'>
-
-            {{#folders}}
-                <a href="{{&files}}" data-ngthumb="{{&files}}" data-ngdesc="">{{id}}</a>
-
-            {{/folders}}
-        </div>
-    </div>
-    <div >
-        <table class="pure-table">
-            <thead><tr><td>Album Name</td></tr></thead>
-            <tbody>
-            {{#folders}}
-                <tr>
-                    <td> {{id}}</td>
-                </tr>
-            {{/folders}}
+                <div >
+                    <table class="pure-table">
+                        <thead><tr><td>Album Name</td></tr></thead>
+                        <tbody>
+                        {{#folders}}
+                            <tr>
+                                <td>
+                                    <a href="myphotos?usrId={{usrId}}&albumId={{id}}">{{id}}</a>
+                                </td>
+                            </tr>
+                        {{/folders}}
 
 
 
-            </tbody>
-        </table>
-    </div>
-</div>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td valign="top" style="width:70%">
+                {{#pictures}}
+
+                    <img id="image{{&id}}" class="myImg" src="/pictures/user{{usrId}}/{{&folderId}}/{{&picturePath}}" alt="{{&id}}" style="width:100%;max-width:300px">
+                    <br/>
+                    <input type="checkbox" name="vehicle1" value="bb"> {{&picturePath}}<br/>
+                    <br/>
+                    <!-- The Modal -->
+                    <div id="modal{{&id}}" class="modal">
+                        <span aria-hidden="true" class="close">&times;</span>
+                        <img class="modal-content" id="modalImage{{&id}}">
+                        <div id="caption{{&id}}" class ="caption" ></div>
+                    </div>
+
+                    <script>
+                        // Get the modal
+                        var modal = document.getElementById('modal{{&id}}');
+
+                        // Get the image and insert it inside the modal - use its "alt" text as a caption
+                        var img = document.getElementById('image{{&id}}');
+                        var modalImg = document.getElementById("modalImage{{&id}}");
+                        var captionText = document.getElementById("caption{{&id}}");
+                        img.onclick = function(){
+                            modal.style.display = "block";
+                            modalImg.src = this.src;
+                            captionText.innerHTML = this.alt;
+                        }
+
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        window.onclick = function(event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
+                    </script>
+                {{/pictures}}
+                <button type="submit">Mark for Edit</button>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
 </body>
 </html>
