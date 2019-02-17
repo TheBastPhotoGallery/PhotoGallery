@@ -25,9 +25,6 @@ public class Picture {
     public void setFolderId(Long folderId) {
         this.folderId = folderId;
     }
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "folder_id")
-//    private Folder folder;
 
     public Long getId() {
         return id;
@@ -38,13 +35,6 @@ public class Picture {
     }
 
 
-//    public Folder getFolder() {
-//        return folder;
-//    }
-//
-//    public void setFolder(Folder folder) {
-//        this.folder = folder;
-//    }
 
     public String getPicturePath() {
         return picturePath;
