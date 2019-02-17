@@ -13,25 +13,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Column(name = "login", nullable = false, unique = true)
-//    private String login;
-
     @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "email")
     private String email;
-
-//    @OneToMany(mappedBy = "email", fetch = FetchType.EAGER)
-//    private Collection<Folder> folderList;
-
-//    public Collection<Folder> getFolderList() {
-//        return folderList;
-//    }
-//
-//    public void setFolderList(Collection<Folder> folderList) {
-//        this.folderList = folderList;
-//    }
 
     public String getEmail() {
         return email;
