@@ -10,4 +10,6 @@ import java.util.Collection;
 @Repository
 public interface PictureRepository extends CrudRepository<Picture, Integer> {
     Collection<Picture> findByFolderId(Long folderId);
+
+
 }

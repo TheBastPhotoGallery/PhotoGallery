@@ -17,6 +17,8 @@ public class Folder {
     @Column(name = "folderName")
     private String folderName;
 
+
+
     @Column(name = "files")
     private String files;
 
