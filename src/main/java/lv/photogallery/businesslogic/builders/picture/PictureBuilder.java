@@ -4,6 +4,7 @@ public class PictureBuilder {
     private Long id;
     private String picturePath;
     private Long folderId;
+    private int checkBox;
 
     private PictureBuilder() {
     }
@@ -17,6 +18,7 @@ public class PictureBuilder {
         picture.setId(id);
         picture.setPicturePath(picturePath);
         picture.setFolderId(folderId);
+        picture.setCheckBox(checkBox);
         return picture;
     }
 
@@ -35,6 +37,10 @@ public class PictureBuilder {
         return this;
     }
 
+    public PictureBuilder withCheckBox(int checkBox) {
+        this.checkBox = checkBox;
+        return this;
+    }
 
     public String getPicturePath() {
         return picturePath;

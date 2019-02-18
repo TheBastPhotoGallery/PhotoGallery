@@ -18,6 +18,17 @@ public class Picture {
     @Column(name = "folderId")
     private Long folderId;
 
+    @Column(name = "checkbox")
+    private int checkBox;
+
+    public int getCheckBox() {
+        return checkBox;
+    }
+
+    public void setCheckBox(int checkBox) {
+        this.checkBox = checkBox;
+    }
+
     public Long getFolderId() {
         return folderId;
     }
