@@ -1,6 +1,7 @@
-package lv.photogallery.businesslogic;
+package lv.photogallery.businesslogic.picturetests;
 
 import lv.photogallery.SpringComponentForTestConfig;
+import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
 import lv.photogallery.businesslogic.builders.user.User;

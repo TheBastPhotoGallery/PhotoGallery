@@ -1,6 +1,5 @@
 package lv.photogallery.businesslogic.builders.picture;
 
-import lv.photogallery.businesslogic.builders.folder.Folder;
 
 import javax.persistence.*;
 
@@ -44,8 +43,6 @@ public class Picture {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public String getPicturePath() {
         return picturePath;
