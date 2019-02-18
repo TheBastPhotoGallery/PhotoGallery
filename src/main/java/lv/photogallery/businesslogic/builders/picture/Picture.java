@@ -11,10 +11,10 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "picturePath", nullable = false)
+    @Column(name = "picturepath", nullable = false)
     private String picturePath;
 
-    @Column(name = "folderId")
+    @Column(name = "folderid")
     private Long folderId;
 
     @Column(name = "checkbox")

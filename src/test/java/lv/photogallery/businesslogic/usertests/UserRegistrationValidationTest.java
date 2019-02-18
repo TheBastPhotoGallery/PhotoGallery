@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -33,6 +34,14 @@ public class UserRegistrationValidationTest {
         user.setEmail("test@Email");
         user.setPassword("testPassword");
         userRepository.save(user);
+    }
+
+    @Test
+    public void shouldRegisterUserTest(){
+        UserRegistrationRequest request = new UserRegistrationRequest("nastran@inbox.lv", "passwordTest");
+        UserRegistrationResponse response = service.register(request);
+        assertTrue(response.isSuccess());
+        assertEquals(userRepository.findByEmail("nastran@inbox.lv").get().getPassword(), "passwordTest");
     }
 
     @Test
