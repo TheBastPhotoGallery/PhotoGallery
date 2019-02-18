@@ -57,46 +57,25 @@ public class UserRealRepositoryInputValidateTest {
         user.setEmail(email1);
         user.setPassword("testPass");
         userRepository.save(user);
-        //assertThat(userRepository.findByEmail(user.getEmail())).get().isEqualTo(user);
         User user2 = new User();
         user2.setEmail(email2);
         user2.setPassword("testPass");
         userRepository.save(user2);
-        //assertThat(userRepository.findByEmail(user2.getEmail())).get().isEqualTo(user2);
-        //assertEquals(userRepository.findByEmail(email1).get().getPassword(), "testPass");
-        //assertEquals(userRepository.findByEmail(email2).get().getPassword(), "testPass");
-        //String name = userRepository.findByEmail(email1).get().getEmail();
+        assertThat(userRepository.findByEmail(user2.getEmail())).get().isEqualTo(user2);
+        assertEquals(userRepository.findByEmail(email1).get().getPassword(), "testPass");
+        assertEquals(userRepository.findByEmail(email2).get().getPassword(), "testPass");
     }
-
-
-
-    @Test
-    @Rollback(false)
-    public void checkUsersPasswordTest(){
-        System.out.println(userRepository.findByEmail(email1).get().getPassword());
-       // assertEquals(userRepository.findByEmail(email1).get().getPassword(), "testPass");
-        //assertEquals(userRepository.findByEmail(email2).get().getPassword(), "testPass");
-    }
-
 
     @Test
     @Rollback(false)
     public void createUsersFoldersInRepositoryTest(){
         System.out.println(userRepository.findByEmail(email1).get().getPassword());
-        User userss = userRepository.findByEmail(email1).get();
-        FolderCreateRequest folderCreateRequest = new FolderCreateRequest("user1FolderName", "", userss);
-
+        FolderCreateRequest folderCreateRequest = new FolderCreateRequest("user1FolderName", "", userRepository.findByEmail(email1).get());
         FolderCreateResponse folderCreateResponse = folderCreateService.create(folderCreateRequest);
         assertTrue(folderCreateResponse.isSuccess());
         FolderCreateRequest folderCreateRequest1 = new FolderCreateRequest("user1FolderName2", "", userRepository.findByEmail(email2).get());
         FolderCreateResponse folderCreateResponse1 = folderCreateService.create(folderCreateRequest1);
         assertTrue(folderCreateResponse1.isSuccess());
-
-    }
-
-    @Test
-    @Rollback(false)
-    public void createUserFoldersPicturesTest(){
         PictureRefCreateRequest request = new PictureRefCreateRequest(folderRepository.findByFolderName("user1FolderName2").get(), "picturePath",
                 userRepository.findByEmail(email1).get());
         PictureRefCreateResponse response = pictureRefCreateService.create(request);
@@ -109,7 +88,7 @@ public class UserRealRepositoryInputValidateTest {
         Collection<Picture> pictures = pictureRepository.findByFolderId(folderRepository.findByFolderName("user1FolderName2").get().getId());
         assertEquals(pictures.iterator().next().getPicturePath(),"picturePath");
         assertEquals(pictures.stream().skip(1).findFirst().orElse(null).getPicturePath(),"picturePath2");
-
     }
+
 
 }
