@@ -16,9 +16,9 @@ public class UserEnterValidatorImpl implements UserEnterValidator {
     @Override
     public List<ValidationError> validate(UserEnterRequest request) {
         List<ValidationError> errors = new ArrayList<>();
+        validateEmail((request.getEmail())).ifPresent(errors::add);
         validatePassword(request.getPassword()).ifPresent(errors::add);
         validateEmailWithPassword(request.getEmail(), request.getPassword()).ifPresent(errors::add);
-        validateEmail((request.getEmail())).ifPresent(errors::add);
         return errors;
     }
 

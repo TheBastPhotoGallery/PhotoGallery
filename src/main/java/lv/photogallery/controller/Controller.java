@@ -3,13 +3,16 @@ package lv.photogallery.controller;
 import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
+import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
 import lv.photogallery.businesslogic.database.PictureRepository;
 import lv.photogallery.businesslogic.database.UserRepository;
-import lv.photogallery.businesslogic.email.SendEmail;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationRequest;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationResponse;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationService;
+import lv.photogallery.businesslogic.services.user.userenter.UserEnterRequest;
+import lv.photogallery.businesslogic.services.user.userenter.UserEnterResponse;
+import lv.photogallery.businesslogic.services.user.userenter.UserEnterService;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationRequest;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationResponse;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationService;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -32,34 +36,55 @@ public class Controller {
     @Autowired
     private PhotoServiceReservationService service;
 
-
     @Autowired
     private UserRegistrationService userRegistrationService;
 
+    @Autowired
+    private UserEnterService userEnterService;
+
 
     @RequestMapping("/")
-    public String index(@RequestParam(value = "photo", required = false) String photo, @RequestParam(value = "time", required = false) String time, @RequestParam(value = "email", required = false) String email) {
-
-        if ((email!= null)) {
-            PhotoServiceReservationRequest request = new PhotoServiceReservationRequest(photo, time, email);
-            PhotoServiceReservationResponse response = service.reserve(request);
-            if (response.isSuccess()) {
-                return "login";
-            } else {
-                List<ValidationError> errors = response.getErrors();
-                if ((errors.get(0).getField() == "service") && (errors.get(0).getErrorMessage() == "This field must be completed!")) {
-                    return "about";
-                }
-//                if ((errors.get(0).getField() == "dateTime") && (errors.get(0).getErrorMessage() == "Sorry, your desired time is booked!")) {
-//                    return "dashboard";
-//                }
-//                if ((errors.get(0).getField() == "email") && (errors.get(0).getErrorMessage() == "Email error!")) {
-//                    return "dashboard";
-//                }
-                if ((errors.get(0).getField() == "email") && (errors.get(0).getErrorMessage() == "You are not registered!")) {
-                    return "dashboard";
-                }
+ //   public String index(@RequestParam(value = "photo", required = false) String photo, @RequestParam(value = "time", required = false) String time, @RequestParam(value = "email", required = false) String email) {
+    public String index(String weddings, String kids, String other, String time, String email) {
+        if ((email!= null) && (!email.isEmpty())) {
+            Optional<User> userOpt = userRepo.findByEmail(email);
+            if (!userOpt.isPresent()) {
+                return "registration7";
             }
+        }
+
+        String photo= null;
+        if (weddings!= null) {
+            photo= weddings;
+        }else {
+            if (kids!= null) {
+                photo= kids;
+            }
+            else {
+                photo= other;
+            }
+        }
+        PhotoServiceReservationRequest request = new PhotoServiceReservationRequest(photo, time, email);
+        PhotoServiceReservationResponse response = service.reserve(request);
+        if (response.isSuccess()) {
+            return "index6";
+        } else {
+            List<ValidationError> errors = response.getErrors();
+                if ((errors.get(0).getField().equals("service")) && (errors.get(0).getErrorMessage().equals("This field must be completed!"))) {
+                    return "index3";
+                }
+                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("This field must be completed!"))) {
+                    return "index4";
+                }
+                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Date/Time format error!"))) {
+                    return "index4";
+                }
+                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Input error!"))) {
+                    return "index4";
+                }
+                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Sorry, your desired time is booked!"))) {
+                    return "index5";
+                }
         }
         return "index";
     }
@@ -70,8 +95,28 @@ public class Controller {
     }
 
     @RequestMapping("/login")
-    public String login() {
-
+    public String login(String email, String password) {
+        if (email!= null) {
+            UserEnterRequest request = new UserEnterRequest(email, password);
+            UserEnterResponse response = userEnterService.enter(request);
+                if (response.isSuccess()) {
+                    return "myphotos";
+                } else {
+                    List<ValidationError> errors = response.getErrors();
+                    if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
+                        return "login2";
+                    }
+                    if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
+                        return "login3";
+                    }
+                    if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Such email not found"))) {
+                        return "login4";
+                    }
+                    if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Incorrect password"))) {
+                        return "login5";
+                    }
+                }
+        }
         return "login";
     }
 
@@ -86,8 +131,7 @@ public class Controller {
 
         return "admin";
     }
-//    public String photos(@RequestParam Integer usrId, @RequestParam(value = "albumId", defaultValue = "null", required = false), Map<String, Object> model) {
-//
+
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, @RequestParam Long albumId, Map<String, Object> model) {
         Collection<Folder> folders = folderRepo.findByUsrId(usrId);
@@ -109,37 +153,34 @@ public class Controller {
     }
 
     @RequestMapping("/registration")
-//  public String registration(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password, @RequestParam(value = "repeat") String repeat) {
-        public String registration(String email, String password, String repeat) {
+    public String registration(String email, String password, String repeat) {
         if (email!= null){
-           if (password.trim().equals(repeat.trim())) {
+           if (password.equals(repeat)) {
                UserRegistrationRequest request = new UserRegistrationRequest(email, password);
                UserRegistrationResponse response = userRegistrationService.register(request);
                if (response.isSuccess()) {
-                   return "login";
+                   return "index2";
                } else {
                    List<ValidationError> errors = response.getErrors();
-                   StringBuilder sb = new StringBuilder();
-                   sb.append(email);
-                   sb.append(errors.get(0).getField());
-                   sb.append(errors.get(0).getErrorMessage());
-                   SendEmail.SendMailMessage(sb, "ajup@inbox.lv");
-
                    if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-                       return "about";
+                       return "registration2";
+                   }
+                   if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
+                       return "registration3";
+                   }
+                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be repeated"))) {
+                       return "registration4";
+                   }
+                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Email error!"))) {
+                       return "registration6";
                    }
                }
            }
-            else {
-               StringBuilder sb = new StringBuilder();
-               sb.append(email);
-               sb.append(password);
-               sb.append(repeat);
-               SendEmail.SendMailMessage(sb, "ajup@inbox.lv");
-               return "login";
+           else {
+               return "registration5";
            }
         }
-        return "/registration";
+        return "registration";
     }
 }
 
