@@ -1,6 +1,5 @@
 package lv.photogallery.realdatabasetest;
 
-import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
 import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
@@ -12,21 +11,14 @@ import lv.photogallery.businesslogic.services.folder.FolderCreateService;
 import lv.photogallery.businesslogic.services.picture.PictureRefCreateRequest;
 import lv.photogallery.businesslogic.services.picture.PictureRefCreateResponse;
 import lv.photogallery.businesslogic.services.picture.PictureRefCreateService;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

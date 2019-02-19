@@ -81,7 +81,7 @@ public class UserRegistrationValidationTest {
         List<ValidationError> errors = response.getErrors();
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "email");
-        assertEquals(errors.get(0).getErrorMessage(), "Must be valid");
+        assertEquals(errors.get(0).getErrorMessage(), "Must be an email");
     }
 
     @Test
