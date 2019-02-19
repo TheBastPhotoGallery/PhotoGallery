@@ -29,13 +29,13 @@ public class FolderCreateServiceImpl implements FolderCreateService {
         if (!validationErrors.isEmpty()) {
             return new FolderCreateResponse(validationErrors);
         }
-
         Folder folder = createFolder()
                 .withFolderName(request.getFolderName())
                 .withFiles(request.getFile())
                 .withUsrId(Integer.valueOf(request.getUser().getId().intValue()))
                 .build();
         folderRepository.save(folder);
+
         logger.info("Creation of new folder with name " + folder.getFolderName() + " in user: " + request.getUser().getEmail());
 
         return new FolderCreateResponse(folder.getId());

@@ -40,13 +40,9 @@ public class FolderCreationValidationTest {
     public void setUp() {
         user.setEmail("testEmail");
         user.setPassword("testPassword");
-
-
-       // user.setFolderList(Collections.singletonList(folder));
         userRepository.save(user);
         folder.setUsrId(user.getId().intValue());
         folder.setFolderName("testFolderName");
-        //folder.setEmail(user);
         folder.setFolderPicture("");
         folderRepository.save(folder);
     }

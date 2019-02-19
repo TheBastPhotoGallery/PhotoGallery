@@ -1,10 +1,7 @@
 package lv.photogallery.businesslogic.builders.folder;
 
-import lv.photogallery.businesslogic.builders.picture.Picture;
-import lv.photogallery.businesslogic.builders.user.User;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "folder")
@@ -14,15 +11,13 @@ public class Folder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "folderName")
+    @Column(name = "foldername", nullable = false)
     private String folderName;
-
-
 
     @Column(name = "files")
     private String files;
 
-    @Column(name = "usrId")
+    @Column(name = "usrid")
     private Integer usrId;
 
     public Integer getUsrId() {
@@ -56,6 +51,4 @@ public class Folder {
     public void setFolderPicture(String files) {
         this.files = files;
     }
-
-
 }

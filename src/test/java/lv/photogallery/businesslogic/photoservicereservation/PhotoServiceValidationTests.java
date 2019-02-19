@@ -35,10 +35,10 @@ import static org.junit.Assert.assertEquals;
 
         @Test
         public void shouldReturnErrorWhenDateError(){
-            PhotoServiceReservationRequest request = new PhotoServiceReservationRequest("Kids", "  2019-02-28 10:00  ", "ajup@inbox.lv");
+            PhotoServiceReservationRequest request = new PhotoServiceReservationRequest("Kids", "  2019-02-30 10:00  ", "ajup@inbox.lv");
             PhotoServiceReservationResponse response = service.reserve(request);
             List<ValidationError> errors = response.getErrors();
- //           assertEquals(errors.size(), 1);
+            assertEquals(errors.size(), 1);
              assertEquals(errors.get(0).getField(), "dateTime");
             assertEquals(errors.get(0).getErrorMessage(), "Date/Time format error!");
         }
