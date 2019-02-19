@@ -17,13 +17,9 @@ import lv.photogallery.businesslogic.services.user.userregistration.UserRegistra
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationResponse;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -123,6 +119,47 @@ public class Controller {
         model.put("pictures", pictures);
         model.put("usrId", usrId);
         return "myphotos";
+    }
+    @PutMapping("/myphotos")
+    public String add(@RequestParam String markForEdit, @RequestParam String all){
+
+        List<String> pictureListStringTrue = new ArrayList<String>(Arrays.asList(markForEdit.split(",")));
+        List<String> pictureListStringAll = new ArrayList<String>(Arrays.asList(all.split(",")));
+        List<Long> pictureListLongAll = new ArrayList<Long>();
+        List<Long> pictureListLongTrue = new ArrayList<Long>();
+
+        for(String a:pictureListStringAll){
+            pictureListLongAll.add(Long.valueOf(a));
+            System.out.println("Checkbox value ALL == > " + a);
+        }
+
+        for(String a:pictureListStringTrue){
+            pictureListLongTrue.add(Long.valueOf(a));
+            System.out.println("Checkbox value TRUE == > " + a);
+        }
+
+
+
+        Collection<Picture> picCollection = pictureRepo.findByIdIn(pictureListLongAll);
+
+        for(Picture p : picCollection){
+
+            if(pictureListLongTrue.contains(p.getId())){
+                p.setCheckBox(1);
+                System.out.println("Path value TRUE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
+            }
+            else{
+                p.setCheckBox(0);
+                System.out.println("Path value FALSE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
+            }
+
+
+        }
+        pictureRepo.saveAll(picCollection);
+
+
+
+        return "/myphotos";
     }
 
 //    @RequestMapping("/registration")
