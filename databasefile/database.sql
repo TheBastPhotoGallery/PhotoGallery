@@ -39,7 +39,7 @@ PRIMARY KEY (`id`)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
-INSERT INTO `photogallery`.`user` (`password`, `email`) VALUES ('adminpass', 'photogallerybootcamp@gmail.com');
+INSERT INTO `photogallery`.`user` (`password`, `email`) VALUES ('1234', 'photogallerybootcamp@gmail.com');
 INSERT INTO `photogallery`.`folder` (`foldername`, `usrid`) VALUES ('adminfolder', '1002');
 INSERT INTO `photogallery`.`picture` (`picturepath`, `folderid`, `checkbox`) VALUES ('https://hsto.org/getpro/habr/post_images/a60/848/42d/a6084842dd1354a400e1719a817f9bba.jpg', '1002', '0');
 
