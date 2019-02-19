@@ -93,32 +93,6 @@ public class Controller {
         return "about";
     }
 
-//    @RequestMapping("/login")
-//    public String login(String email, String password) {
-//        if (email!= null) {
-//            UserEnterRequest request = new UserEnterRequest(email, password);
-//            UserEnterResponse response = userEnterService.enter(request);
-//                if (response.isSuccess()) {
-//                    return "myphotos";
-//                } else {
-//                    List<ValidationError> errors = response.getErrors();
-//                    if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-//                        return "login2";
-//                    }
-//                    if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-//                        return "login3";
-//                    }
-//                    if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Such email not found"))) {
-//                        return "login4";
-//                    }
-//                    if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Incorrect password"))) {
-//                        return "login5";
-//                    }
-//                }
-//        }
-//        return "login";
-//    }
-
     @RequestMapping("/dashboard")
     public String dashboard() {
 
@@ -151,35 +125,35 @@ public class Controller {
         return "myphotos";
     }
 
-    @RequestMapping("/registration")
-    public String registration(String email, String password, String repeat) {
-        if (email!= null){
-           if (password.equals(repeat)) {
-               UserRegistrationRequest request = new UserRegistrationRequest(email, password);
-               UserRegistrationResponse response = userRegistrationService.register(request);
-               if (response.isSuccess()) {
-                   return "index2";
-               } else {
-                   List<ValidationError> errors = response.getErrors();
-                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-                       return "registration2";
-                   }
-                   if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-                       return "registration3";
-                   }
-                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be repeated"))) {
-                       return "registration4";
-                   }
-                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Email error!"))) {
-                       return "registration6";
-                   }
-               }
-           }
-           else {
-               return "registration5";
-           }
-        }
-        return "registration";
-    }
+//    @RequestMapping("/registration")
+//    public String registration(String email, String password, String repeat) {
+//        if (email!= null){
+//           if (password.equals(repeat)) {
+//               UserRegistrationRequest request = new UserRegistrationRequest(email, password);
+//               UserRegistrationResponse response = userRegistrationService.register(request);
+//               if (response.isSuccess()) {
+//                   return "index2";
+//               } else {
+//                   List<ValidationError> errors = response.getErrors();
+//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
+//                       return "registration2";
+//                   }
+//                   if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
+//                       return "registration3";
+//                   }
+//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be repeated"))) {
+//                       return "registration4";
+//                   }
+//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Email error!"))) {
+//                       return "registration6";
+//                   }
+//               }
+//           }
+//           else {
+//               return "registration5";
+//           }
+//        }
+//        return "registration";
+//    }
 }
 
