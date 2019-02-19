@@ -37,35 +37,35 @@ public class AdminController {
 //        modelAndView.setViewName("login");
 //        return modelAndView;
 //    }
+//
+//    @RequestMapping(value = "/login")
+//    public ModelAndView postLogin(String email, String password){
+//        System.out.println("aasdadsasd");
+//        //logger.info(user.getEmail());
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");
+//
+//
+//
+//        UserEnterRequest userEnterRequest = new UserEnterRequest(email, password);
+//        UserEnterResponse userEnterResponse = userEnterService.enter(userEnterRequest);
+//
+//        //modelAndView.addObject("password", "123" );
+//        if(userEnterResponse.isSuccess()){
+//            logger.info("Login success!");
+//            modelAndView.setViewName("dashboard");
+//        }
+//        if(password != null && email != null) {
+//            modelAndView.addObject("jumbo-title", "Error, please enter email");
+//        }else{
+//            modelAndView.addObject("jumbo-title", "");
+//        }
+//        // model.put("password","password");
+//        return modelAndView;
+//    }
 
-    @RequestMapping(value = "/login")
-    public ModelAndView postLogin(String email, String password){
-        System.out.println("aasdadsasd");
-        //logger.info(user.getEmail());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
 
-
-
-        UserEnterRequest userEnterRequest = new UserEnterRequest(email, password);
-        UserEnterResponse userEnterResponse = userEnterService.enter(userEnterRequest);
-
-        //modelAndView.addObject("password", "123" );
-        if(userEnterResponse.isSuccess()){
-            logger.info("Login success!");
-            modelAndView.setViewName("dashboard");
-        }
-        if(password != null && email != null) {
-            modelAndView.addObject("jumbo-title", "Error, please enter email");
-        }else{
-            modelAndView.addObject("jumbo-title", "");
-        }
-        // model.put("password","password");
-        return modelAndView;
-    }
-
-
-    @RequestMapping("/login1")
+    @RequestMapping("/login")
     public String login(String email, String password){
         UserEnterRequest userEnterRequest = new UserEnterRequest(email, password);
         UserEnterResponse userEnterResponse = userEnterService.enter(userEnterRequest);
