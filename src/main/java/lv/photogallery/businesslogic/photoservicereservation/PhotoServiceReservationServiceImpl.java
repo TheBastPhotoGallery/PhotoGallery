@@ -50,7 +50,7 @@ public class PhotoServiceReservationServiceImpl implements PhotoServiceReservati
         sb.append("Your PhotoGallery Team<br/>\n");
         if (!SendEmail.SendMailMessage(sb, request.getEmail())) {
             validationErrors = new ArrayList<>();
-            validationErrors.add(new ValidationError("sendEmail", "Email error!"));
+            validationErrors.add(new ValidationError("email", "Email error!"));
             return new PhotoServiceReservationResponse(validationErrors);
         }
 

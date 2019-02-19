@@ -1,7 +1,6 @@
 package lv.photogallery.businesslogic.photoservicereservation;
 
 import lv.photogallery.businesslogic.ValidationError;
-import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -99,12 +98,14 @@ public class PhotoServiceReservationValidationImpl implements PhotoServiceReserv
     }
 
     private Optional<ValidationError> validateEmail(String email) {
+        /*
         if (email != null && !email.isEmpty()) {
             Optional<User> userOpt = userRepository.findByEmail(email);
             if (!userOpt.isPresent()) {
                 return Optional.of(new ValidationError("email", "You are not registered!"));
             }
         }
+        */
         return Optional.empty();
     }
 }

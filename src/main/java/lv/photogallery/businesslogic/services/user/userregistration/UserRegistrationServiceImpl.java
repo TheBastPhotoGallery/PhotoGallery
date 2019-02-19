@@ -56,5 +56,4 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         return new UserRegistrationResponse(user.getId());
     }
-
 }

@@ -106,11 +106,12 @@
 
 <div class="login-page">
     <div class="form">
-        <form action="/registration-form">
-
-            <input type="text" placeholder="email address"/>
-            <input type="password" placeholder="password"/>
-            <input type="password" placeholder="repeat password"/>
+        <form action="/registration">
+        <div>
+            <input type="text" placeholder="emailaddress" name="email">
+            <input type="text" placeholder="password" name= "password">
+            <input type="text" placeholder="repeatpassword" name= "repeat">
+        </div>
             <input type="submit" value="Create">
             <p class="message">Already registered?<a href=/login>Login</a></p>
         </form>
