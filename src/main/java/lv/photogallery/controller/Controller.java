@@ -50,26 +50,25 @@ public class Controller {
             Optional<User> userOpt = userRepo.findByEmail(email);
             if (!userOpt.isPresent()) {
                 return "registration7";
-            }
-        }
 
-        String photo= null;
-        if (weddings!= null) {
-            photo= weddings;
-        }else {
-            if (kids!= null) {
-                photo= kids;
             }
-            else {
-                photo= other;
+
+            String photo = null;
+            if (weddings != null) {
+                photo = weddings;
+            } else {
+                if (kids != null) {
+                    photo = kids;
+                } else {
+                    photo = other;
+                }
             }
-        }
-        PhotoServiceReservationRequest request = new PhotoServiceReservationRequest(photo, time, email);
-        PhotoServiceReservationResponse response = service.reserve(request);
-        if (response.isSuccess()) {
-            return "index6";
-        } else {
-            List<ValidationError> errors = response.getErrors();
+            PhotoServiceReservationRequest request = new PhotoServiceReservationRequest(photo, time, email);
+            PhotoServiceReservationResponse response = service.reserve(request);
+            if (response.isSuccess()) {
+                return "index6";
+            } else {
+                List<ValidationError> errors = response.getErrors();
                 if ((errors.get(0).getField().equals("service")) && (errors.get(0).getErrorMessage().equals("This field must be completed!"))) {
                     return "index3";
                 }
@@ -85,8 +84,8 @@ public class Controller {
                 if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Sorry, your desired time is booked!"))) {
                     return "index5";
                 }
-        }
-        return "index";
+            }
+        }return "index";
     }
 
     @RequestMapping("/about")
