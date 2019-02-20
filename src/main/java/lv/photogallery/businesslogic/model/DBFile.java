@@ -18,6 +18,9 @@ public class DBFile {
 
     @Lob
     private byte[] data;
+    //Maby will be in the project
+   // private Long folderId;
+    // private int checkBox;
 
     public DBFile() {
 
