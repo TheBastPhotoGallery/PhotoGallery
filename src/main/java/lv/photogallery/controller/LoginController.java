@@ -32,7 +32,7 @@ public class LoginController {
 
             if (userEnterResponse.isSuccess()) {
                 logger.info("Login success!");
-                modelAndView.setViewName("dashboard");
+                modelAndView.setViewName("dashboard2");
             } else {
                 modelAndView = errorMsg(modelAndView, userEnterResponse.getErrors());
             }

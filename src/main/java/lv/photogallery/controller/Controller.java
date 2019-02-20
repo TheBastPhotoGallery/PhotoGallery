@@ -37,7 +37,7 @@ public class Controller {
     private UserEnterService userEnterService;
 
 
-    @RequestMapping("/")
+    @RequestMapping("/1")
  //   public String index(@RequestParam(value = "photo", required = false) String photo, @RequestParam(value = "time", required = false) String time, @RequestParam(value = "email", required = false) String email) {
     public String index(String weddings, String kids, String other, String time, String email) {
         if ((email!= null) && (!email.isEmpty())) {
@@ -87,11 +87,11 @@ public class Controller {
         return "about";
     }
 
-    @RequestMapping("/dashboard")
-    public String dashboard() {
-
-        return "dashboard";
-    }
+//    @RequestMapping("/dashboard")
+//    public String dashboard() {
+//
+//        return "dashboard";
+//    }
 
     @RequestMapping("/admin")
     public String admin() {
@@ -190,5 +190,11 @@ public class Controller {
 //        }
 //        return "registration";
 //    }
+
+@RequestMapping("/dashboard2")
+public String dashboard2() {
+
+    return "dashboard2";
+}
 }
 
