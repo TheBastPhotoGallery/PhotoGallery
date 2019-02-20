@@ -13,6 +13,9 @@
 <body>
 
 <div class="container">
+    <div class="log">
+        <button class="in"><a class="start" href="/">Start</a></button>
+    </div>
     <script>
         let picker = document.getElementById('picker');
         let listing = document.getElementById('listing');
@@ -25,14 +28,13 @@
             };
         });
     </script>
-    <div class="container">
-
-        <h2>My folders</h2>
+    <div>
+        <a href="/myalbums"><h2>My folders</h2></a>
         <h2>Upload folder</h2>
         <div class="picker"><input type="file" id="picker" name="fileList" webkitdirectory multiple></div>
 
         <ul id="listing"></ul>
-        <input type="submit" value="Submit">
+        <input class="in" type="submit" value="Submit">
 
 
     </div>

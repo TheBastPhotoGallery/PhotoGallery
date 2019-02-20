@@ -14,16 +14,26 @@
 <div class="container">
     <p>all folders</p>
     <div>
-        <form method="post" enctype="multipart/form-data">
-            <div>
-                <label for="file">Choose file to upload</label>
-                <input type="file" id="file" name="file" multiple>
-            </div>
-            <div>
-                <button>Submit</button>
-            </div>
-        </form>
+        <script>
+            let picker = document.getElementById('picker');
+            let listing = document.getElementById('listing');
+
+            picker.addEventListener('change', e => {
+                for (let file of Array.from(e.target.files)) {
+                    let item = document.createElement('li');
+                    item.textContent = file.webkitRelativePath;
+                    listing.appendChild(item);
+                };
+            });
+        </script>
+        <div>
+            <h2>Upload folder</h2>
+            <div class="picker"><input type="file" id="picker" name="fileList" webkitdirectory multiple></div>
+
+            <ul id="listing"></ul>
+            <input class="in" type="submit" value="Submit">
     </div>
+</div>
 </div>
 </body>
 </html>
