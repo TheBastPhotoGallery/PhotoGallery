@@ -10,14 +10,12 @@ import lv.photogallery.businesslogic.database.UserRepository;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationRequest;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationResponse;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationService;
-import lv.photogallery.businesslogic.services.user.userenter.UserEnterRequest;
-import lv.photogallery.businesslogic.services.user.userenter.UserEnterResponse;
 import lv.photogallery.businesslogic.services.user.userenter.UserEnterService;
-import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationRequest;
-import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationResponse;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -99,10 +97,6 @@ public class Controller {
     public String admin() {
 
         return "admin";
-    }
-    @RequestMapping("/reset")
-    public String reset(){
-        return "reset";
     }
 
     @RequestMapping("/myphotos")
