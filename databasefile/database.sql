@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `files` (
 `filetype` VARCHAR(100) DEFAULT NULL,
 `foldername` VARCHAR(100) DEFAULT NULL,
 `useremail` VARCHAR(100) DEFAULT NULL,
-`data` varbinary(8000),
+`data` BLOB,
 PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
