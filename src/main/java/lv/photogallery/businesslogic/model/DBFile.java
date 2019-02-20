@@ -16,6 +16,8 @@ public class DBFile {
 
     private String filetype;
 
+    private Long folderid;
+
     @Lob
     private byte[] data;
     //Maby will be in the project
@@ -30,6 +32,14 @@ public class DBFile {
         this.filename = fileName;
         this.filetype = fileType;
         this.data = data;
+    }
+
+    public Long getFolderid() {
+        return folderid;
+    }
+
+    public void setFolderid(Long folderid) {
+        this.folderid = folderid;
     }
 
     public Long getId() {
