@@ -100,6 +100,10 @@ public class Controller {
 
         return "admin";
     }
+    @RequestMapping("/reset")
+    public String reset(){
+        return "reset";
+    }
 
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, @RequestParam Long albumId, Map<String, Object> model) {
