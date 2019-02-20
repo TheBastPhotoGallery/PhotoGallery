@@ -116,10 +116,16 @@ public class Controller {
         model.put("folders", folders);
         model.put("pictures", pictures);
         model.put("usrId", usrId);
+
         return "myphotos";
     }
+    @RequestMapping("/myalbums")
+    public String photos(Map<String, Object> model) {
+
+        return "myalbums";
+    }
     @PutMapping("/myphotos")
-    public String add(@RequestParam String markForEdit, @RequestParam String all){
+    public String add(@RequestParam String markForEdit, @RequestParam String all, @RequestParam String userIdd, @RequestParam String folderIdd){
 
         List<String> pictureListStringTrue = new ArrayList<String>(Arrays.asList(markForEdit.split(",")));
         List<String> pictureListStringAll = new ArrayList<String>(Arrays.asList(all.split(",")));
@@ -157,7 +163,7 @@ public class Controller {
 
 
 
-        return "/myphotos";
+        return "redirect:/myphotos?usrId="+userIdd+"&albumId="+folderIdd;
     }
 
 //    @RequestMapping("/registration")
