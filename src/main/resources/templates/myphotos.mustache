@@ -126,7 +126,7 @@
                     <input type="hidden" name="_method" value="put" />
                 {{#pictures}}
 
-                    <img id="image{{&id}}" class="myImg" src="/pictures/user{{usrId}}/{{&folderId}}/{{&picturePath}}" alt="{{&id}}" style="width:100%;max-width:300px">
+                    <img id="image{{&id}}" class="myImg" src="/pictures/user{{usrId}}/{{&folderName}}/{{&picturePath}}" alt="{{&id}}" style="width:100%;max-width:300px">
                     <br/>
                     <input type="hidden" name="all" value={{&id}}>
                     <input type="checkbox" id="markForEdit{{&id}}"  name="markForEdit" value={{&id}}> {{&checkBox}} {{&picturePath}}<br/>

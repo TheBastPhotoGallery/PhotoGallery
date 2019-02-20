@@ -16,13 +16,23 @@ public class DBFile {
 
     private String filetype;
 
-    private Long folderid;
+    private String foldername;
+
+    private String useremail;
 
     @Lob
     private byte[] data;
     //Maby will be in the project
    // private Long folderId;
     // private int checkBox;
+
+    public String getUseremail() {
+        return useremail;
+    }
+
+    public void setUseremail(String useremail) {
+        this.useremail = useremail;
+    }
 
     public DBFile() {
 
@@ -34,12 +44,12 @@ public class DBFile {
         this.data = data;
     }
 
-    public Long getFolderid() {
-        return folderid;
+    public String getFoldername() {
+        return foldername;
     }
 
-    public void setFolderid(Long folderid) {
-        this.folderid = folderid;
+    public void setFoldername(String foldername) {
+        this.foldername = foldername;
     }
 
     public Long getId() {
