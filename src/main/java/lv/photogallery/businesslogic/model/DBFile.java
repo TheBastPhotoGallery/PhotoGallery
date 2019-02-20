@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Table(name = "files")
 public class DBFile {
     @Id
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    private Long id;
 
-    private String fileName;
+    private String filename;
 
-    private String fileType;
+    private String filetype;
 
     @Lob
     private byte[] data;
@@ -27,33 +27,33 @@ public class DBFile {
     }
 
     public DBFile(String fileName, String fileType, byte[] data) {
-        this.fileName = fileName;
-        this.fileType = fileType;
+        this.filename = fileName;
+        this.filetype = fileType;
         this.data = data;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
-    public String getFileType() {
-        return fileType;
+    public String getFiletype() {
+        return filetype;
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
+    public void setFiletype(String filetype) {
+        this.filetype = filetype;
     }
 
     public byte[] getData() {

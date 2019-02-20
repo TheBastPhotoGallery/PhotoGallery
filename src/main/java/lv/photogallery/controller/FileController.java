@@ -2,7 +2,6 @@ package lv.photogallery.controller;
 
 import lv.photogallery.businesslogic.model.DBFile;
 import lv.photogallery.businesslogic.payload.UploadFileResponse;
-import lv.photogallery.businesslogic.services.DBFileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,10 @@ public class FileController {
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
-                .path(dbFile.getId())
+                .path(dbFile.getId().toString())
                 .toUriString();
 
-        return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
+        return new UploadFileResponse(dbFile.getFilename(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
 
@@ -54,8 +53,8 @@ public class FileController {
         DBFile dbFile = DBFileStorageService.getFile(fileId);
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+                .contentType(MediaType.parseMediaType(dbFile.getFiletype()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFilename() + "\"")
                 .body(new ByteArrayResource(dbFile.getData()));
     }
 
