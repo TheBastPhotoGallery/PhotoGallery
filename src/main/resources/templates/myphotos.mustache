@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
@@ -10,6 +9,8 @@
 
 
     <style>
+
+
         .headerPanel{
             padding:4px;
             width:60%;
@@ -18,18 +19,26 @@
         .spanNew{
             padding:4px;
             background-color:#f1f1f1;
-            color:#000000;
+            color:#a6aebc;
             border-style: solid;
             border-width: 0px;
             border-color: #000000;
         }
+        .header2{
+            padding:4px;
+
+            color:#f1f1f1;
+            background-color: #2f4f4f;
+
+        }
+
         .headerH{
             padding:4px;
-            background-color:#000000;
+            background-color: #2f4f4f;
             color:#f1f1f1;
-            border-style: solid;
-            border-width: 2px;
-            border-color: #f1f1f1;
+            overflow:hidden;
+
+
         }
         a {
             color: #f4f4f4;
@@ -141,7 +150,9 @@
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+
         }
+        .close {display: none;}
 
         /* Modal Content (image) */
         .modal-content {
@@ -150,7 +161,9 @@
             width: 80%;
             max-width: 700px;
         }
-
+        .modal-header .close {
+            display:none;
+        }
         /* Caption of Modal Image */
         .caption {
             margin: auto;
@@ -210,23 +223,32 @@
 </head>
 <body>
 
-<div align="left" class="headerH">
-        <span >Select album: </span>
-        {{#folders}}
-            <span > <a href="myphotos?usrId={{usrId}}&albumId={{id}}">{{folderName}}</a></span>
-        {{/folders}}
 
-</div>
-
-<div align="center">Welcome <b>{{usrId}}</b>,this is your photo gallery.</div>
-<br/>
 <form method="post">
+
     <input type="hidden" name="_method" value="put" />
     <input type="hidden" name="userIdd" value={{usrId}} />
-    <input type="hidden" name="folderIdd" value="1003" />
+    <input type="hidden" name="folderIdd" value={{folderId}} />
+<div align="right" class="headerH">
+    <span class="in" style="float: left">
+    Welcome <b>{{usrId}}</b>,this is your photo gallery.
+    </span>
+    <span style="float: right">
+    <button class="in" onclick="window.location.href='/pictures/user{{usrId}}/{{&folderId}}/{{&folderId}}.zip'" type="button">Download</button>
+    <button class="in" type="submit">Submit to Edit</button>
+    <button class="in" onclick="window.location.href='http://localhost:8080/home'" type="button">SignOut</button>
+    </span>
+</div>
 
-<div align="right">
-    <button type="submit">Submit to Edit</button>
+<br/>
+
+<div align="center" style="width:100%">
+    <div style="width:40%" align="center" class="header2">
+    <span >Select album: </span>
+    {{#folders}}
+        <button class="in" onclick="window.location.href='myphotos?usrId={{usrId}}&albumId={{id}}'" type="button">{{folderName}}</button>
+    {{/folders}}
+    </div>
 </div>
 <div class="masonry">
 
@@ -235,7 +257,7 @@
         <img id="image{{&id}}" class="myImg" src="/pictures/user{{usrId}}/{{&folderId}}/{{&picturePath}}" alt="{{&id}}">
         <br/>
         <input type="hidden" name="all" value={{&id}}>
-        <input type="checkbox" id="markForEdit{{&id}}"  name="markForEdit" value={{&id}}> {{&checkBox}} {{&picturePath}}<br/>
+        <input type="checkbox" id="markForEdit{{&id}}"  name="markForEdit" value={{&id}}> Picture: {{&picturePath}}<br/>
 
         <br/>
         <!-- The Modal -->
@@ -251,7 +273,7 @@
 
             document.getElementById("markForEdit{{&id}}").checked = {{&checkBox}};
 
-            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            // Get the image and insert it inside the modal
             var img = document.getElementById('image{{&id}}');
             var modalImg = document.getElementById("modalImage{{&id}}");
             var captionText = document.getElementById("caption{{&id}}");
@@ -260,10 +282,8 @@
                 modalImg.src = this.src;
                 captionText.innerHTML = this.alt;
             }
-
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
-
             // When the user clicks on <span> (x), close the modal
             span.onclick = function() {
                 modal.style.display = "none";
@@ -280,9 +300,6 @@
     </form>
 
 </div>
-
-
-
 
 
 

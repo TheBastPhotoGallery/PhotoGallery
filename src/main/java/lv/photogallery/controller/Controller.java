@@ -31,7 +31,7 @@ public class Controller {
     private UserEnterService userEnterService;
 
     @RequestMapping("/about")
-    public String about() {
+    public String about(){
         return "about";
     }
 
@@ -42,75 +42,64 @@ public class Controller {
 
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, @RequestParam Long albumId, Map<String, Object> model) {
-        Collection<Folder> folders;
-        if(usrId.equals(userRepo.findByEmail("photogallerybootcamp@gmail.com").get().getId().intValue())){
-           folders = folderRepo.findAll();
-        }else{
-            folders = folderRepo.findByUsrId(usrId);
-        }
-
-
+        Collection<Folder> folders = folderRepo.findByUsrId(usrId);
         Boolean albumAccess = false;
-        for (Folder folder : folders) {
-            if (folder.getId().equals(albumId)) {
+        for(Folder folder: folders) {
+            if(folder.getId().equals(albumId)){
                 albumAccess = true;
             }
         }
-        Collection<Picture> pictures = pictureRepo.findByFolderId(0L);
-        if (albumAccess == true) {
+        Collection<Picture> pictures = pictureRepo.findByFolderId(0L) ;
+        if(albumAccess == true) {
             pictures = pictureRepo.findByFolderId(albumId);
         }
-
         model.put("folders", folders);
         model.put("pictures", pictures);
         model.put("usrId", usrId);
-
+        model.put("folderId", albumId);
         return "myphotos";
     }
 
-    @RequestMapping("/myalbums")
-    public String photos(Map<String, Object> model) {
-
-        return "myalbums";
-    }
 
     @PutMapping("/myphotos")
-    public String add(@RequestParam String markForEdit, @RequestParam String all, @RequestParam String userIdd, @RequestParam String folderIdd) {
-        System.out.println("11");
+    public String add(@RequestParam String markForEdit, @RequestParam String all, @RequestParam String userIdd, @RequestParam String folderIdd){
+
         List<String> pictureListStringTrue = new ArrayList<String>(Arrays.asList(markForEdit.split(",")));
         List<String> pictureListStringAll = new ArrayList<String>(Arrays.asList(all.split(",")));
         List<Long> pictureListLongAll = new ArrayList<Long>();
         List<Long> pictureListLongTrue = new ArrayList<Long>();
 
-        for (String a : pictureListStringAll) {
+        for(String a:pictureListStringAll){
             pictureListLongAll.add(Long.valueOf(a));
-            System.out.println("Checkbox value ALL == > " + a);
+            //System.out.println("Checkbox value ALL == > " + a);
         }
 
-        for (String a : pictureListStringTrue) {
+        for(String a:pictureListStringTrue){
             pictureListLongTrue.add(Long.valueOf(a));
-            System.out.println("Checkbox value TRUE == > " + a);
+            //System.out.println("Checkbox value TRUE == > " + a);
         }
+
         Collection<Picture> picCollection = pictureRepo.findByIdIn(pictureListLongAll);
 
-        for (Picture p : picCollection) {
+        for(Picture p : picCollection){
 
-            if (pictureListLongTrue.contains(p.getId())) {
+            if(pictureListLongTrue.contains(p.getId())){
                 p.setCheckBox(1);
-                System.out.println("Path value TRUE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
-            } else {
+                //System.out.println("Path value TRUE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
+            }
+            else{
                 p.setCheckBox(0);
-                System.out.println("Path value FALSE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
+                //System.out.println("Path value FALSE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
             }
         }
         pictureRepo.saveAll(picCollection);
-        return "redirect:/myphotos?usrId=" + userIdd + "&albumId=" + folderIdd;
+        return "redirect:/myphotos?usrId="+userIdd+"&albumId="+folderIdd;
     }
 
-    @RequestMapping("/dashboard2")
-    public String dashboard2() {
+@RequestMapping("/dashboard2")
+public String dashboard2() {
 
-        return "dashboard2";
-    }
+    return "dashboard2";
+}
 }
 
