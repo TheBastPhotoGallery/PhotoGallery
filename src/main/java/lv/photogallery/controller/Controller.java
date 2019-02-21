@@ -1,14 +1,10 @@
 package lv.photogallery.controller;
 
-import lv.photogallery.businesslogic.ValidationError;
 import lv.photogallery.businesslogic.builders.folder.Folder;
 import lv.photogallery.businesslogic.builders.picture.Picture;
-import lv.photogallery.businesslogic.builders.user.User;
 import lv.photogallery.businesslogic.database.FolderRepository;
 import lv.photogallery.businesslogic.database.PictureRepository;
 import lv.photogallery.businesslogic.database.UserRepository;
-import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationRequest;
-import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationResponse;
 import lv.photogallery.businesslogic.photoservicereservation.PhotoServiceReservationService;
 import lv.photogallery.businesslogic.services.user.userenter.UserEnterService;
 import lv.photogallery.businesslogic.services.user.userregistration.UserRegistrationService;
@@ -35,52 +31,6 @@ public class Controller {
 
     @Autowired
     private UserEnterService userEnterService;
-
-
-    @RequestMapping("/1")
- //   public String index(@RequestParam(value = "photo", required = false) String photo, @RequestParam(value = "time", required = false) String time, @RequestParam(value = "email", required = false) String email) {
-    public String index(String weddings, String kids, String other, String time, String email) {
-        if ((email!= null) && (!email.isEmpty())) {
-            Optional<User> userOpt = userRepo.findByEmail(email);
-            if (!userOpt.isPresent()) {
-                return "registration7";
-
-            }
-
-            String photo = null;
-            if (weddings != null) {
-                photo = weddings;
-            } else {
-                if (kids != null) {
-                    photo = kids;
-                } else {
-                    photo = other;
-                }
-            }
-            PhotoServiceReservationRequest request = new PhotoServiceReservationRequest(photo, time, email);
-            PhotoServiceReservationResponse response = service.reserve(request);
-            if (response.isSuccess()) {
-                return "index6";
-            } else {
-                List<ValidationError> errors = response.getErrors();
-                if ((errors.get(0).getField().equals("service")) && (errors.get(0).getErrorMessage().equals("This field must be completed!"))) {
-                    return "index3";
-                }
-                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("This field must be completed!"))) {
-                    return "index4";
-                }
-                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Date/Time format error!"))) {
-                    return "index4";
-                }
-                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Input error!"))) {
-                    return "index4";
-                }
-                if ((errors.get(0).getField().equals("dateTime")) && (errors.get(0).getErrorMessage().equals("Sorry, your desired time is booked!"))) {
-                    return "index5";
-                }
-            }
-        }return "index";
-    }
 
     @RequestMapping("/about")
     public String about(){
@@ -165,37 +115,6 @@ public class Controller {
 
         return "redirect:/myphotos?usrId="+userIdd+"&albumId="+folderIdd;
     }
-
-//    @RequestMapping("/registration")
-//    public String registration(String email, String password, String repeat) {
-//        if (email!= null){
-//           if (password.equals(repeat)) {
-//               UserRegistrationRequest request = new UserRegistrationRequest(email, password);
-//               UserRegistrationResponse response = userRegistrationService.register(request);
-//               if (response.isSuccess()) {
-//                   return "index2";
-//               } else {
-//                   List<ValidationError> errors = response.getErrors();
-//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-//                       return "registration2";
-//                   }
-//                   if ((errors.get(0).getField().equals("password")) && (errors.get(0).getErrorMessage().equals("Must not be empty"))) {
-//                       return "registration3";
-//                   }
-//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Must not be repeated"))) {
-//                       return "registration4";
-//                   }
-//                   if ((errors.get(0).getField().equals("email")) && (errors.get(0).getErrorMessage().equals("Email error!"))) {
-//                       return "registration6";
-//                   }
-//               }
-//           }
-//           else {
-//               return "registration5";
-//           }
-//        }
-//        return "registration";
-//    }
 
 @RequestMapping("/dashboard2")
 public String dashboard2() {
