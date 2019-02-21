@@ -32,7 +32,8 @@ public class LoginController {
 
             if (userEnterResponse.isSuccess()) {
                 logger.info("Login success!");
-                modelAndView.setViewName("dashboard2");
+                modelAndView.setViewName("redirect:/myphotos?usrId=1003"+"&albumId=1003");
+                return  modelAndView;
             } else {
                 modelAndView = errorMsg(modelAndView, userEnterResponse.getErrors());
             }
