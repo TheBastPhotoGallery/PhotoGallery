@@ -1,6 +1,6 @@
 package lv.photogallery.businesslogic.database;
 
-import lv.photogallery.businesslogic.model.DBFile;
+import lv.photogallery.businesslogic.upload.DBFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

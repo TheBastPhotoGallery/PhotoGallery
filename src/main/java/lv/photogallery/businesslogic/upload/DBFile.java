@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.model;
+package lv.photogallery.businesslogic.upload;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,9 +22,6 @@ public class DBFile {
 
     @Lob
     private byte[] data;
-    //Maby will be in the project
-   // private Long folderId;
-    // private int checkBox;
 
     public String getUseremail() {
         return useremail;

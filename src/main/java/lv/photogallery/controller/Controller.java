@@ -25,10 +25,8 @@ public class Controller {
     private UserRepository userRepo;
     @Autowired
     private PhotoServiceReservationService service;
-
     @Autowired
     private UserRegistrationService userRegistrationService;
-
     @Autowired
     private UserEnterService userEnterService;
 
@@ -37,15 +35,8 @@ public class Controller {
         return "about";
     }
 
-//    @RequestMapping("/dashboard")
-//    public String dashboard() {
-//
-//        return "dashboard";
-//    }
-
     @RequestMapping("/admin")
     public String admin() {
-
         return "admin";
     }
 
@@ -110,9 +101,6 @@ public class Controller {
 
         }
         pictureRepo.saveAll(picCollection);
-
-
-
         return "redirect:/myphotos?usrId="+userIdd+"&albumId="+folderIdd;
     }
 

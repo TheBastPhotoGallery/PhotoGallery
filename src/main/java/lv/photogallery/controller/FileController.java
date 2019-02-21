@@ -1,7 +1,7 @@
 package lv.photogallery.controller;
 
-import lv.photogallery.businesslogic.model.DBFile;
-import lv.photogallery.businesslogic.payload.UploadFileResponse;
+import lv.photogallery.businesslogic.upload.DBFile;
+import lv.photogallery.businesslogic.upload.UploadFileResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,6 @@ public class FileController {
 
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
-        // Load file from database
         DBFile dbFile = DBFileStorageService.getFile(fileId);
 
         return ResponseEntity.ok()

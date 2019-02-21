@@ -3,7 +3,7 @@ package lv.photogallery.businesslogic.services;
 import lv.photogallery.businesslogic.database.DBFileRepository;
 import lv.photogallery.businesslogic.exeption.FileStorageException;
 import lv.photogallery.businesslogic.exeption.MyFileNotFoundException;
-import lv.photogallery.businesslogic.model.DBFile;
+import lv.photogallery.businesslogic.upload.DBFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,11 +18,9 @@ public class DBFileStorageService {
     private DBFileRepository dbFileRepository;
 
     public DBFile storeFile(MultipartFile file) {
-        // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            // Check if the file's name contains invalid characters
             if(fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }

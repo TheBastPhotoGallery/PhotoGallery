@@ -1,4 +1,4 @@
-package lv.photogallery.businesslogic.payload;
+package lv.photogallery.businesslogic.upload;
 
 public class UploadFileResponse {
     private String fileName;
