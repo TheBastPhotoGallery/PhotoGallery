@@ -10,6 +10,12 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+div.bg{
+    width: 15%;
+    border-radius: 20px;
+    margin: 0 0 15px;
+    padding: 10px;
+}
 .container{
     margin: 2%;
     padding-bottom: 3%;
