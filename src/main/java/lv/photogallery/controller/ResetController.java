@@ -57,7 +57,13 @@ public class ResetController {
                         userOpt.get().setPassword(newPassword);
                         userRepo.save(userOpt.get());
                     }
-                modelAndView.setViewName("index");
+                modelAndView.setViewName("home");
+                modelAndView.addObject("jumbo1", "");
+                modelAndView.addObject("jumbo2", "");
+                modelAndView.addObject("jumbo3", "");
+                modelAndView.addObject("jumbo4", "");
+                modelAndView.addObject("jumbo5", "");
+                modelAndView.addObject("jumbo6", "");
             }
         }
         return modelAndView;

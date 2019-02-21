@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="/style.css" rel="stylesheet">
+<head>
+    <title>home</title>
+
+<body>
+
+<script>
+function KeepCount() {
+    let NewCount = 0
+    if (document.photo.weddings.checked) {
+        NewCount = NewCount + 1
+    }
+    if (document.photo.kids.checked) {
+        NewCount = NewCount + 1
+    }
+    if (document.photo.other.checked) {
+        NewCount = NewCount + 1
+    }
+    if (NewCount >1) {
+        alert('Pick One type')
+        document.photo;
+        return false;
+    }
+}
+</script>
+
+<div class="container">
+    <div class="log">
+        <button class="in"><a class="login" href=/login>Login</a></button>
+    </div>
+    <div class="jumbotron">
+        <p>{{jumbo5}}</p>
+    </div>
+    <div class="jumbotron">
+        <p>{{jumbo6}}</p>
+    </div>
+    <div class="ab">
+        <button class="in"><a class="login" href="/about">About us</a></button>
+    </div>
+
+    <h1><i><b>Welcome to our photoservice</b></i></h1>
+
+    <h2><i>Pick up theme for photosession</i></h2>
+
+    <div class="leftBottom">
+        <form action="/home" name = "photo">
+            <div>
+                <div class="w3-container">
+                    <input type="checkbox" class="in" name="weddings" value="Weddings"
+                           onClick="return KeepCount()"> <b>Weddings</b>
+                </div>
+
+                <div class="w3-container">
+                    <input type="checkbox" class="in" name="kids" value="Kids"
+                           onClick="return KeepCount()"> <b>Kids</b>
+                </div>
+
+                <div class="w3-container">
+                    <input type="checkbox" class="in" name="other" value="Other"
+                           onClick="return KeepCount()"><b>Other</b>
+                </div>
+                <div class="jumbotron">
+                    <p>{{jumbo1}}</p>
+                </div>
+
+                <div>
+                    <p> Please, enter your desired date and time in format YYYY-MM-DD HH:00 </p>
+                    <p>Our working hours 10:00-18:00</p>
+                </div>
+
+                <input class="in" type="text" name="time"><br>
+                <div class="jumbotron">
+                    <p>{{jumbo2}}</p>
+                </div>
+                <div class="jumbotron">
+                    <p>{{jumbo3}}</p>
+                </div>
+                <div class="jumbotron">
+                    <p>{{jumbo4}}</p>
+                </div>
+
+                <iframe src="https://calendar.google.com/calendar/embed?showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=photogallerybootcamp%40gmail.com&amp;color=%231B887A&amp;ctz=Europe%2FRiga" style="border:solid 1px #777" width="800" height="400" frameborder="0" scrolling="no"></iframe>
+                <div>
+                    <p>Enter your e-mail: <input class="in" type="text" name="email"></p><br>
+                </div>
+            </div>
+            <div>
+            <input class="in" type="submit" value="Submit">
+
+            </div>
+            </form>
+    </div>
+</div>
+</body>
+</html>

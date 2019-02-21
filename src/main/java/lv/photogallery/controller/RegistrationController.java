@@ -22,8 +22,9 @@ public class RegistrationController {
     @RequestMapping("/registration")
     public ModelAndView registration(String email, String password, String repeat) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("jumbo", "");
         if (password == null && email == null && repeat == null) {
-            modelAndView.addObject("jumbo", "");
+
         } else {
             if (password.equals(repeat)) {
                 UserRegistrationRequest request = new UserRegistrationRequest(email, password);
@@ -31,10 +32,20 @@ public class RegistrationController {
                 modelAndView.setViewName("registration");
                 if (response.isSuccess()) {
                     logger.info("Registration success!");
-                    modelAndView.setViewName("index");
+                    modelAndView.setViewName("home");
+                    modelAndView.addObject("jumbo1", "");
+                    modelAndView.addObject("jumbo2", "");
+                    modelAndView.addObject("jumbo3", "");
+                    modelAndView.addObject("jumbo4", "");
+                    modelAndView.addObject("jumbo5", "Thank You! Your registration is completed!");
+                    modelAndView.addObject("jumbo6", "");
+                    return modelAndView;
                 } else {
                     modelAndView = errorMsg(modelAndView, response.getErrors());
                 }
+            }
+            else {
+                modelAndView.addObject("jumbo", "Password and Repeat password don't match");
             }
         }
         return modelAndView;
