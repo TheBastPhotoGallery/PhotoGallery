@@ -32,7 +32,8 @@ public class LoginController {
 
             if (userEnterResponse.isSuccess()) {
                 logger.info("Login success!");
-                modelAndView.setViewName("redirect:/myphotos?usrId=1003"+"&albumId=1003");
+
+                modelAndView.setViewName("redirect:/myphotos?usrId=" + userEnterResponse.getUserId().intValue() +"&albumId=" +userEnterResponse.getUserId().intValue());
                 return  modelAndView;
             } else {
                 modelAndView = errorMsg(modelAndView, userEnterResponse.getErrors());
