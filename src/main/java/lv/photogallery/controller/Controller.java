@@ -42,7 +42,12 @@ public class Controller {
 
     @RequestMapping("/myphotos")
     public String photos(@RequestParam Integer usrId, @RequestParam Long albumId, Map<String, Object> model) {
-        Collection<Folder> folders = folderRepo.findByUsrId(usrId);
+        Collection<Folder> folders;
+        if(usrId.equals(userRepo.findByEmail("photogallerybootcamp@gmail.com").get().getId().intValue())){
+            folders = folderRepo.findAll();
+        }else{
+            folders = folderRepo.findByUsrId(usrId);
+        }
         Boolean albumAccess = false;
         for(Folder folder: folders) {
             if(folder.getId().equals(albumId)){
@@ -71,12 +76,10 @@ public class Controller {
 
         for(String a:pictureListStringAll){
             pictureListLongAll.add(Long.valueOf(a));
-            //System.out.println("Checkbox value ALL == > " + a);
         }
 
         for(String a:pictureListStringTrue){
             pictureListLongTrue.add(Long.valueOf(a));
-            //System.out.println("Checkbox value TRUE == > " + a);
         }
 
         Collection<Picture> picCollection = pictureRepo.findByIdIn(pictureListLongAll);
@@ -85,11 +88,9 @@ public class Controller {
 
             if(pictureListLongTrue.contains(p.getId())){
                 p.setCheckBox(1);
-                //System.out.println("Path value TRUE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
             }
             else{
                 p.setCheckBox(0);
-                //System.out.println("Path value FALSE == > " + p.getPicturePath() + " && CHECKBOX  " + p.getCheckBox());
             }
         }
         pictureRepo.saveAll(picCollection);
