@@ -10,6 +10,17 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+img.bg{
+    cursor: pointer;
+    width: 100%;
+    padding-top: 10%;
+}
+img.bg:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+img.bg:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
 p.error{
     color: darkred;
     font-size: 25px;
@@ -100,7 +111,7 @@ li{
     margin-left: inherit;
     text-decoration: none;
 }
-.in {
+button.in {
     background-color: darkslategray;
     font-size: 18px;
 }
@@ -109,9 +120,6 @@ div.w3-container {
     width: 80%;
     padding: 10px;
     background-color: lightsteelblue;
-}
-.ab {
-    margin-left: 83.5%;
 }
 .login {
     margin-left: inherit;
