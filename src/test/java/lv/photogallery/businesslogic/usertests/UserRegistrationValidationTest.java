@@ -38,10 +38,10 @@ public class UserRegistrationValidationTest {
 
     @Test
     public void shouldRegisterUserTest(){
-        UserRegistrationRequest request = new UserRegistrationRequest("nastran@inbox.lv", "passwordTest");
+        UserRegistrationRequest request = new UserRegistrationRequest("validEmail@inbox.lv", "passwordTest");
         UserRegistrationResponse response = service.register(request);
         assertTrue(response.isSuccess());
-        assertEquals(userRepository.findByEmail("nastran@inbox.lv").get().getPassword(), "passwordTest");
+        assertEquals(userRepository.findByEmail("validEmail@inbox.lv").get().getPassword(), "passwordTest");
     }
 
     @Test
